@@ -1,3 +1,0 @@
-* [English](en/)
-* [Magyar](hu/)
-
