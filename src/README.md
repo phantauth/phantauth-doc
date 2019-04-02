@@ -5,7 +5,7 @@
 
 ## OpenID Connect Provider
 
-OpenID Connect identity provider for random generated users. You can integrate PhantAuth as standard OpenID Connect provider to any web site or mobile application.
+OpenID Connect identity provider for random generated users. You can integrate PhantAuth as standard OpenID Connect provider to any web site or mobile application directly or via authentication integrators.
 
 ## Random User Generator
 
