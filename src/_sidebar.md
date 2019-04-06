@@ -1,5 +1,5 @@
 
-- [Introduction](README.md)
+- [Introduction](/)
 
 - [Integration](integration.md)
 

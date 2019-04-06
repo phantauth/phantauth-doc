@@ -58,7 +58,7 @@ Példák:
 
 ## Customizable Tenants
 
-A PhantAuth rendkívül sokoldalúan testreszabható. Lehetőség van saját véletlenszerű felhasználó generátor service használatára, felhasználók külső CSV-ből vagy Google Sheet-ből történő generálására. A megjelenés testre szabható Bootstrap témák használatával, ezen kívül a megjelenés nagyobb mértékben megváltozattható egyéni HTML template-ek használatával.
+A PhantAuth rendkívül sokoldalúan testreszabható. Lehetőség van saját véletlenszerű felhasználó generátor service használatára, felhasználók külső CSV-ből vagy Google Sheet-ből történő generálására. A megjelenés testre szabható Bootstrap témák használatával, ezen kívül a megjelenés nagyobb mértékben megváltozattható egyéni HTML template-ek használatával. További részletek a [Tenant](tenant.md) fejezetben.
 
 A testreszabás ún. tenant-ok segítségével történik. Egy egy tenant tekinthető úgy mint egy önálló PhantAuth szolgáltatás. A tenant-ok saját véletlenszerű felhasználó generátor végpontokkal valamint OpenID Connect végpontokkal rendelkeznek.
 
@@ -75,6 +75,7 @@ A PhantAuth Domain a default tenant mellett tartalmaz néhány példa tenant-ot,
  - [uinames](https://phantauth.net/_uinames) - based on https://uinames.com service
  - [Mockaroo](https://phantauth.net/_mockaroo) - based on  https://mockaroo.com service
 
+A domain-t és tenant-okat bárki létrehozhat. Az egymás közötti egyszerűbb tenant megosztást segíti a [PhantAuth Shared Domain](https://shared.phantauth.net). A shared domain-hez a [phantauth.cf](http://phantauth.cf) DNS zóna tartozik, melyben bárki létrehozhat tenant konfigurációs bejegyzéseket a [FreeDNS](https://freedns.afraid.org/) szolgáltatás segítségével.
 
 ## Pricing
 
