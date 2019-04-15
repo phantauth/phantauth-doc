@@ -12,6 +12,11 @@ végpont  | cím
 issuer   | https://phantauth.net
 discovery| https://phantauth.net/.well-known/openid-configuration
 
+credential    | érték
+--------------|--------------
+client_id     | test.client
+client_secret | UTBcWwt5
+
 ## OpenID Connect Provider
 
 A PhantAuth OpenID Connect Provider-e támogatja az OpenID Connect specifikációban szereplő flow-kat (Hybrid, Implicit, Authorization Code) valamint az OAuth 2.0 specifikációban szereplő Resource Owner Password grant type-ot. A PhantAuth mint OpenID Connect Provider, intergrálható web alkalmazásokhoz, mobil alkalmazásokhoz, backend alkalmazásokhoz egyaránt. Az integráció törénhet direkt módon mint OpenID Connect Provider vagy történhet authentikációs integrátor szolgáltatásokon keresztül mint pl az Auth0 vagy Azure Active Directory B2C. További részletek az [Integration](integration.md) fejezetben.
