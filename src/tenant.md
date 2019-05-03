@@ -87,9 +87,14 @@ Saját template-ek használatával az oldalak teljes mértékben testreszabható
 
 ### factory
 
-A PhantAuth lehetőséget ad saját random user és team generator használatára, melynek címét a `factory` tenant paraméterben lehet megadni. A paraméter értéke egy [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) kifejezés. Az URI template a `kind` paraméterben kapja meg a generálandó objektum típusát (user vagy team), a `name` paraméterben pedig a generálandó objektum azonosítóját.
+A PhantAuth lehetőséget ad saját random resource (user, team, client, fleet) generator használatára, melynek címét a `factory` tenant paraméterben lehet megadni. A paraméter értéke egy [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) kifejezés. Az URI template a `kind` paraméterben kapja meg a generálandó objektum típusát (user, team, client, fleet), a `name` paraméterben pedig a generálandó objektum azonosítóját. Amennyiben a template kifejezés nem tartalmaz `kind` paramétert, úgy csak user generátornak tekinti a rendszer s a többi resource generálása alapértelmezés szerint történik.
 
 ### depot
 
+Lehetőség van a user és client resource-ok generálása helyett egy előre létrehozott készletből történő véletlenszerű kiválasztásra. Ez esetben a resource adatokat tartalmazó CSV file URL-jét a `depot` pareméterben lehet megadni. A paraméter értéke egy [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) kifejezés. Az URI template a `kind` paraméterben kapja meg a generálandó objektum típusát (user, client). Amennyiben a template kifejezés nem tartalmaz `kind` paramétert, úgy csak user generátornak tekinti a rendszer s a többi resource generálása alapértelmezés szerint történik. 
+
+A CSV file első sora tartalmazza a resource property neveket, a további sorok pedig az adatokat. Egymásba ágyazott property-k esetén a property névben '.' karakter választja el a név egyes elemeit (pl address.formatted). Amennyiben a template kifejezés nem tartalmaz `kind` paramétert, úgy csak user generátornak tekinti a rendszer s a client resource generálása alapértelmezés szerint történik.
+
 ### sheet
 
+Lehetőség van a user adatok Google Sheet dokumentumból történő véletlenszerű kiválasztására. A `sheet` paraméterben egy publikus Google Sheet dokumentum azonosítója adható meg. A táblázat első sora tartalmazza a user property neveket, a további sorok pedig az adatokat. Egymásba ágyazott property-k esetén a property névben '.' karakter választja el a név egyes elemeit (pl address.formatted).
