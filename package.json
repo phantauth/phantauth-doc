@@ -1,21 +1,11 @@
 {
   "name": "phantauth-doc",
   "version": "1.0.0",
-  "description": "PhantAuth documentation",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "PhantAuth Documentation",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phantauth/doc.git"
+    "url": "https://github.com/phantauth/phantauth-doc.git"
   },
-  "author": "Ivan Szkiba",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/phantauth/doc/issues"
-  },
-  "homepage": "https://github.com/phantauth/doc#readme",
-  "devDependencies": {},
   "dependencies": {}
 }
