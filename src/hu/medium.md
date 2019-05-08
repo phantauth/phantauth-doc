@@ -51,7 +51,7 @@ Ezen generátorok többnyire pseudorandom number generator alapúak s lehetővé
 Ez érdekes, de nem tűnik különösen hasznosnak.
 
 
-# distributed service configuration database for free
+# Get distributed service configuration database for free
 
 > Use DNS as service configuration database
 

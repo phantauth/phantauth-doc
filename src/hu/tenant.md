@@ -30,16 +30,18 @@ Ily módon bárki lértehozhat saját tenant-ot, egyszerűen egy DNS domain vala
 
 Az alábbi táblázat a tenant-ok működését befolyásoló tenant paraméterek összefoglalását tartalmazza.
 
-property              | leírás
-----------------------|-------
-[name](#name)         | a tenant megjelenítendő neve
-[flags](#flags)       | login oldalt befolyásoló generator flag-ek
-[theme](#theme)       | Bootstrap theme címe
-[template](#template) | HTML oldal template-ek címe
-[factory](#factory)   | külső user/client generator címe
-[depot](#depot)       | külső user/client adatbázis címe
-[sheet](#sheet)       | user adatbázist tartalmazó Google Sheet azonosítója
-
+property                    | leírás
+----------------------------|-------
+[name](#name)               | a tenant megjelenítendő neve
+[flags](#flags)             | login oldalt befolyásoló generator flag-ek
+[theme](#theme)             | Bootstrap theme címe
+[template](#template)       | HTML oldal template-ek címe
+[factory](#factory)         | külső user/client generator címe
+[depot](#depot)             | külső user/client adatbázis címe
+[sheet](#sheet)             | user adatbázist tartalmazó Google Sheet azonosítója
+[script](#script)           | a HTML oldalakra beszúrandó JavaScript URL-je
+[summary](#summary)         | a tenant egy soros summary-ja
+[attribution](#attribution) | külső forrás megjelölés
 
 ### name
 
@@ -106,3 +108,121 @@ A `depots` paraméterben adható meg, hogy a `depot` paraméterben beállított 
 ### sheet
 
 Lehetőség van a user adatok Google Sheet dokumentumból történő véletlenszerű kiválasztására. A `sheet` paraméterben egy publikus Google Sheet dokumentum azonosítója adható meg. A táblázat első sora tartalmazza a user property neveket, a további sorok pedig az adatokat. Egymásba ágyazott property-k esetén a property névben '.' karakter választja el a név egyes elemeit (pl address.formatted).
+
+A `sheet` paraméter használatára példa a `gods` nevű tenant, mely egy [publikus Google Sheets](https://docs.google.com/spreadsheets/d/1Xa4mRcLWroJr2vUDhrJXGBcobYmpS8fNZxFpXw-M9DY/) dokumentumban írja le a felhasználók adatait. Ez esetben a sheet azonosítója `1Xa4mRcLWroJr2vUDhrJXGBcobYmpS8fNZxFpXw-M9DY`, így az ezt leíró DNS TXT record:
+
+```
+gods	120	IN	TXT	"sheet=1Xa4mRcLWroJr2vUDhrJXGBcobYmpS8fNZxFpXw-M9DY"
+```
+
+### script
+
+A login.html, consent.html és test.html oldalakra automatikusan beilleszthető egy custom JavaScript file, aminek az URL-je a `script` paraméterben adható meg. Ennek segítségével akár kliens oldali random user generátor is beköthető. 
+
+### summary
+
+A `summary` paraméterben egy rövid, egy soros leírás, szlogen adható meg a tenant-hoz. Ez a tenant nyitó oldalán jelenik meg valamint azokon az oldalakon ahol az elérhető tenant-ok listája szerepel.
+
+### attribution
+
+Külső adatforrás, random user generator használata esetén az `attribution` paraméterben adható meg attribution. Az attribution-ban Markdown formázás használható, így megadhatók kiemelések, link-ek a külső forrásra:
+
+```
+randomuser	120	IN	TXT	"attribution=User data generated using [RANDOM USER GENERATOR](https://randomuser.me/)."
+```
+
+## Példák
+
+A PhantAuth rendszer számos példát tartalmaz custom tenant létrehozására. Ezek használatra kész tenant-ok, bár elsősorban példaként készültek, a customizálás demonstrálására.
+
+### faker
+
+A [PhantAuth Faker](https://phantauth.net/_faker) tenant a JavaScript Faker library-ra épülő generátor tartalmaz. A generátor az ingyenes [ZEIT Now](https://now.sh) serverless deployment platform-on fut. Forráskódja a [phantauth-faker](https://github.com/phantauth/phantauth-faker) GitHub repository-ban érhető el. DNS konfigurációja:
+
+```
+faker.phantauth.net. 120	IN	TXT	"factories=team"
+faker.phantauth.net. 120	IN	TXT	"factories=user"
+faker.phantauth.net. 120	IN	TXT	"flags=small"
+faker.phantauth.net. 120	IN	TXT	"factory=https://phantauth-faker.now.sh/api{/kind,name}"
+faker.phantauth.net. 120	IN	TXT	"userinfo=Dream Team"
+faker.phantauth.net. 120	IN	TXT	"theme=https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/united/bootstrap.min.css"
+faker.phantauth.net. 120	IN	TXT	"logo=https://phantauth-faker.now.sh/faker-logo.svg"
+faker.phantauth.net. 120	IN	TXT	"name=PhantAuth Faker"
+```
+
+### chance
+
+A [PhantAuth Chance](https://phantauth.net/_chance) tenant a JavaScript Chance library-ra épülő generátor tartalmaz. A generátor az ingyenes [ZEIT Now](https://now.sh) serverless deployment platform-on fut. Forráskódja a [phantauth-chance](https://github.com/phantauth/phantauth-chance) GitHub repository-ban érhető el. DNS konfigurációja:
+
+```
+chance.phantauth.net. 120	IN	TXT	"flags=small"
+chance.phantauth.net. 120	IN	TXT	"name=PhantAuth Chance"
+chance.phantauth.net. 120	IN	TXT	"factory=https://phantauth-chance.now.sh/api{/kind,name}"
+chance.phantauth.net. 120	IN	TXT	"factories=team"
+chance.phantauth.net. 120	IN	TXT	"factories=user"
+chance.phantauth.net. 120	IN	TXT	"theme=https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/united/bootstrap.min.css"
+chance.phantauth.net. 120	IN	TXT	"logo=https://phantauth-chance.now.sh/chance-logo.png"
+```
+
+### casual
+
+A [PhantAuth Casual](https://phantauth.net/_casual) tenant a JavaScript Casual library-ra épülő generátor tartalmaz. A generátor az ingyenes [Auth0 Webtask](https://webtask.io) serverless deployment platform-on fut. Forráskódja a [phantauth-casual](https://github.com/phantauth/phantauth-casual) GitHub repository-ban érhető el. DNS konfigurációja:
+
+```
+casual.phantauth.net. 120	IN	TXT	"logo=https://www.phantauth.net/logo/phantauth-logo-gray.svg"
+casual.phantauth.net. 120	IN	TXT	"name=PhantAuth Casual"
+casual.phantauth.net. 120	IN	TXT	"factory=https://wt-51217f7b3eee6aead0123eeafe3b83e8-0.sandbox.auth0-extend.com/user{?name}"
+casual.phantauth.net. 120	IN	TXT	"theme=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+```
+
+### gods
+
+A [Greek Gods](https://phantauth.net/_gods) tenant esetén egy [publikus Google Sheets](https://docs.google.com/spreadsheets/d/1Xa4mRcLWroJr2vUDhrJXGBcobYmpS8fNZxFpXw-M9DY/) dokumentum tartalmazza a felhasználók adatait. DNS konfigurációja:
+
+```
+gods.phantauth.net.	120	IN	TXT	"attribution=God pictures come from  [Theoi Project](https://www.theoi.com/), a site exploring Greek mythology and the gods in classical literature and art."
+gods.phantauth.net.	120	IN	TXT	"name=Greek Gods"
+gods.phantauth.net.	120	IN	TXT	"flags=medium"
+gods.phantauth.net.	120	IN	TXT	"theme=https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/sandstone/bootstrap.min.css"
+gods.phantauth.net.	120	IN	TXT	"logo=https://cdn.staticaly.com/favicons/www.theoi.com"
+gods.phantauth.net.	120	IN	TXT	"sheet=1Xa4mRcLWroJr2vUDhrJXGBcobYmpS8fNZxFpXw-M9DY"
+```
+
+### randomuser
+
+A [RANDOM USER](https://phantauth.net/_randomuser) tenant a népszerű https://randomuser.me szolgáltatást használja random user generálásra. A randomuser.me service hívása kliens oldalon történik, a hívást a `script` paraméterben megadott [randomuser.js](https://www.phantauth.net/selfie/randomuser.js) script tartalmazza. DNS konfigurációja:
+
+```
+randomuser.phantauth.net.	120	IN	TXT	"attribution=User data generated using [RANDOM USER GENERATOR](https://randomuser.me/)."
+randomuser.phantauth.net.	120	IN	TXT	"script=https://www.phantauth.net/selfie/randomuser.js"
+randomuser.phantauth.net.	120	IN	TXT	"flags=small"
+randomuser.phantauth.net.	120	IN	TXT	"name=RANDOM USER"
+randomuser.phantauth.net.	120	IN	TXT	"logo=https://cdn.staticaly.com/favicons/randomuser.me"
+randomuser.phantauth.net.	120	IN	TXT	"theme=https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/sandstone/bootstrap.min.css"
+```
+
+### uinames
+
+A [uinames](https://phantauth.net/_uinames) tenant a https://uinames.com szolgáltatást használja random user generálásra. A uinames.com service hívása kliens oldalon történik, a hívást a `script` paraméterben megadott [uinames.js](https://www.phantauth.net/selfie/uinames.js) script tartalmazza. DNS konfigurációja:
+
+```
+uinames.phantauth.net.	120	IN	TXT	"attribution=User data generated using [uinames.com API](https://uinames.com)."
+uinames.phantauth.net.	120	IN	TXT	"logo=https://uinames.com/assets/img/ios-precomposed.png"
+uinames.phantauth.net.	120	IN	TXT	"flags=small"
+uinames.phantauth.net.	120	IN	TXT	"theme=https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/minty/bootstrap.min.css"
+uinames.phantauth.net.	120	IN	TXT	"name=uinames"
+uinames.phantauth.net.	120	IN	TXT	"script=https://www.phantauth.net/selfie/uinames.js"
+```
+
+### mockaroo
+
+A [Mockaroo](https://phantauth.net/_mockaroo) tenant a https://mockaroo.com szolgáltatást használja random user generálásra. A mockaroo.com service hívása kliens oldalon történik, a hívást a `script` paraméterben megadott [mockaroo.js](https://www.phantauth.net/selfie/mockaroo.js) script tartalmazza. DNS konfigurációja:
+
+```
+mockaroo.phantauth.net.	120	IN	TXT	"attribution=User data generated using [Mockaroo's Mock APIs](https://mockaroo.com/mock_apis)."
+mockaroo.phantauth.net.	120	IN	TXT	"script=https://www.phantauth.net/selfie/mockaroo.js"
+mockaroo.phantauth.net.	120	IN	TXT	"logo=https://www.phantauth.net/selfie/kongaroo.svg"
+mockaroo.phantauth.net.	120	IN	TXT	"flags=small"
+mockaroo.phantauth.net.	120	IN	TXT	"theme=https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/minty/bootstrap.min.css"
+mockaroo.phantauth.net.	120	IN	TXT	"name=Mockaroo"
+```
