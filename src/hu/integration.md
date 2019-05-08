@@ -187,7 +187,7 @@ Az [OpenID Connect Test Page](https://www.phantauth.net/test/oidc) oldalon kipr�
 
 # Auth0
 
-Az [Auth0](https://auth0.com) az egyik legnépszerűbb authentikációs integrátor szolgáltatás. Segítségével a legkülönbözőbb identity provider-ek köthetők be egységes módon az alkalmazásba. A bekötött provider-ek köre az alkalmazás nélkül bővíthető, módosítható. Mivel a PhantAuth csak teszteléshez használatos, célszerű egy, az Auth0-hoz hasonló integrátoron keresztül bekötni az alkalmazásba, mert így bármikor ki-be- kapcsolható, illetve az alkalmazás különböző environment-jeihez (test, demo, stb) az alkalmazás módosítása nélkül hozzáadható.
+Az [Auth0](https://auth0.com) az egyik legnépszerűbb authentikációs integrátor szolgáltatás. Segítségével a legkülönbözőbb identity provider-ek köthetők be egységes módon az alkalmazásba. A bekötött provider-ek köre az alkalmazás módosítása nélkül bővíthető, módosítható. Mivel a PhantAuth csak teszteléshez használatos, célszerű egy, az Auth0-hoz hasonló integrátoron keresztül bekötni az alkalmazásba, mert így bármikor ki-be- kapcsolható, illetve az alkalmazás különböző environment-jeihez (test, demo, stb) az alkalmazás módosítása nélkül hozzáadható.
 
 Az Auth0-n keresztüli integráció az Auth0 **Custom Social Connections** nevű extension-jén keresztül történik, mely az **Extensions** menüponton keresztül érhető el.
 
@@ -226,7 +226,7 @@ Az oldal az *Auth0 JavaScript SDK* felhasználásával készült.
 
 # Azure AD B2C
 
-Az Azure Active Directory B2C a Microsoft authentikációs integrációs megoldása végfelhasználói alkalmazások számára. Az OpenID Connect támogatás még csak preview státuszban van s viszonylag minimális számú property használatát teszi lehetővé. Mint identity provider integrátor, használata az Auth-hoz hasonló előnyökkel jár, azaz az alkalmazás módosítása nélkül egyszerűen beköthető a PhantAuth a teszt környezetekbe (test, demo stb) mint identity provider.
+Az Azure Active Directory B2C a Microsoft authentikációs integrációs megoldása végfelhasználói alkalmazások számára. Az OpenID Connect támogatás még csak preview státuszban van s viszonylag minimális számú property használatát teszi lehetővé. Mint identity provider integrátor, használata az Auth0-hoz hasonló előnyökkel jár, azaz az alkalmazás módosítása nélkül egyszerűen beköthető a PhantAuth a teszt környezetekbe (test, demo stb) mint identity provider.
 
 Az Azure porálon az Azure AD B2C **Identity Providers* menüpontjában találhatók a bekonfigurált identity provider-ek.
 

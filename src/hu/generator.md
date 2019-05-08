@@ -18,13 +18,13 @@ Az azonosítóból generált jellemzőket időnként szeretnénk testreszabni. B
 
 ### Flags
 
-Az objektum (user, client, stb) egyes jellemzőinek generátorai különböző flag-ekkel testreszabhatók, paraméterezhetők. A flag-ek csoportokra oszthatók, aszerint hogy mely jellemző generálását befolyásolják. A flag maga egy kulcsszó. Egyidejűleg több, eltérő jellemző generálását befolyásoló flag is megadható. A flag-eket egymástól és az azonosító többi részétől pontosvessző `;` karakter választja el:
+Az objektumok (user, client, stb) egyes jellemzői különböző flag-ekkel testreszabhatók, paraméterezhetők. A flag-ek csoportokra oszthatók, aszerint hogy mely jellemző generálását befolyásolják. A flag maga egy kulcsszó. Egyidejűleg több, különböző jellemző generálását befolyásoló flag is megadható. A flag-eket egymástól és az azonosító többi részétől pontosvessző `;` karakter választja el:
 
 ```
 joe;female;kitten
 ```
 
-A fenti példa a user generator használata esetén a generált felhasználó nőnemű lesz s az avatar-ja egy véletlenszerűen kiválasztott macska rajz lesz. A többi jellemzője a 'joe' névből determinisztikusan generálódik, azaz értékükre nincs hatással a megadott két. A példához tartozó [profile oldal itt](https://phantauth.net/~joe%3bfemale%3bkitten) megtekinthető.
+A fenti példa a user generator használata esetén a generált felhasználó nőnemű lesz s az avatar-ja egy véletlenszerűen kiválasztott macska rajz lesz. A többi jellemzője a 'joe' névből determinisztikusan generálódik, azaz értékükre nincs hatással a megadott két flag. A példához tartozó [profile oldal itt](https://phantauth.net/~joe%3bfemale%3bkitten) megtekinthető.
 
 A flag-ek részletes leírása az [API](api.md) dokumentációban található.
 
@@ -32,7 +32,7 @@ Fontos megjegyezni, hogy a flag-ek részét képzik az azonosítónak, lévén h
 
 ### Name
 
-A generált objektumok többnyire rendelkeznek teljes névvel, mely az azonosítóból generálódik. A teljes név generálása kiiktatható, ha az azonosító tartalmaz minimum egy pont (`.`) vagy szóköz (` `) karaktert. Ez esetben e karakterek szeparator szerepet töltenek be a teljes név egyes részei között (pl family name, given name). Azaz a teljes név ilyenkor nem véletlenszerűen generálódik az azonosítóból, hanem a szeparator karaktereket figyelembe véve az azonosító egyes részeiből készül a teljes név (a kezdőbetűk nagybetűssé alakításával). Szóköz helyett célszerű pont karaktert használni.
+A generált objektumok többnyire rendelkeznek teljes névvel, mely az azonosítóból generálódik. A teljes név generálás helyett képezhető az azonosítóból, ha az azonosító tartalmaz minimum egy pont (`.`) vagy szóköz (` `) karaktert. Ez esetben e karakterek szeparator szerepet töltenek be a teljes név egyes részei között (pl family name, given name). Azaz a teljes név ilyenkor nem véletlenszerűen generálódik az azonosítóból, hanem a szeparator karaktereket figyelembe véve az azonosító egyes részeiből készül a teljes név (a kezdőbetűk nagybetűssé alakításával). Szóköz helyett célszerű pont karaktert használni.
 
 ```
 joe.black;sketch
@@ -48,7 +48,7 @@ Minden objektumhoz generálódik egy egyedi email cím (user esetén `email`, eg
 
 ### Email
 
-Minden objektumhoz generálódik egy disposable, működő email cím, mely alkalmas email fogadásra. A generált email cím helyett lehetőség van saját emaiél cím használatára is (pl előre létrehozott teszt email címek). Ez esetben az azonosító egy email címet tartalmaz. Az adott objektumhoz tartozó kép értelemszerűen ez esetben az azonosítóban található email címhez tartozó gravatar kép lesz.
+Minden objektumhoz generálódik egy disposable, működő email cím, mely alkalmas email fogadásra. A generált email cím helyett lehetőség van saját email cím használatára is (pl előre létrehozott teszt email címek). Ez esetben az azonosító egy email címet tartalmaz. Az adott objektumhoz tartozó kép értelemszerűen ez esetben az azonosítóban található email címhez tartozó gravatar kép lesz.
 
 ```
 ivan.test.szkiba@spam4.me
