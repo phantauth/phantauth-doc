@@ -5,7 +5,7 @@
 
 ## TL;DR
 
-**A PhantAuth célja a tesztelés egyszerűbbé tétele OpenID Connect autentikációt használó alkalmazások számára, véletlenszerűen generált felhasználók segítségével.**
+**PhantAuth was designed to simplify testing for applications using OpenID Connect authentication by making use of random generated users.**
 
 end point | address
 --- | ---
@@ -19,7 +19,7 @@ client_secret | UTBcWwt5
 
 ## OpenID Connect Provider
 
-A PhantAuth OpenID Connect Provider-e támogatja az OpenID Connect specifikációban szereplő flow-kat (Hybrid, Implicit, Authorization Code) valamint az OAuth 2.0 specifikációban szereplő Resource Owner Password grant type-ot. A PhantAuth mint OpenID Connect Provider, intergrálható web alkalmazásokhoz, mobil alkalmazásokhoz, backend alkalmazásokhoz egyaránt. Az integráció törénhet direkt módon mint OpenID Connect Provider vagy történhet authentikációs integrátor szolgáltatásokon keresztül mint pl az Auth0 vagy Azure Active Directory B2C. További részletek az [Integration](integration.md) fejezetben.
+The OpenID Connect Provider of PhantAuth supports the flows listed in the OpenID Connect specifications (Hybrid, Implicit, Authorization Code), as well as the Resource Owner Password grant type, specified in the OAuth 2.0 specifications. PhantAuth as an OpenID Connect Provider can be integrated with a variety of web applications, mobil applications, and  backend applications. The integration can be either direct, as in the case of the OpenID Connect Provider, or through an authentication integration service, as in the case of Auth0 or Azure Active Directory B2C. To learn more, please go to chapter [Integration](integration.md).
 
 Examples:
 
@@ -29,7 +29,7 @@ Examples:
 
 ## Random User Generator
 
-A PhantAuth véletlenszerű felhasználó generátora használható önállóan is, az OpenID Connect Provider szolgáltatástól függetlenül. Tetszőleges számú test felhasználó generálható. A generált felhasználók adatai bármikor újragenerálhatók a felhasználói név ismeretében (OpenID Connect *sub* claim). A generált felhasználók rendelkeznek egyedi, működő, eldobható email címmel, több készletből választható profil képpel s a szokásos profil adatokkal. Lehetőség van saját email cím és profil kép megadására is. A PhantAuth saját véletlenszerű felhasználó generátora is testreszabható, de ezen kívül lehetőség van küső generátorok bekötésére is. További részletek a [Generator](generator.md) fejezetben.
+The random user generator of PhantAuth can also be used separately, independent of the OpenID Connect Provider. You can generate an optional number of test users. In the knowledge of their user name, the data of the generated users can be regenerated at any time (OpenID Connect *sub* claim). The generated users have a unique, operational, disposable email address, a profile picture selected from one of the multiple pools of pictures, and the usual profile data. Custom email addresses and profile pictures may also be added. The random user generator of PhantAuth can be fully customized. Additionally, you can link an external generator to the application. For details,please go to chapter [Generator](generator.md).
 
 Test pages:
 
@@ -42,7 +42,7 @@ Test pages:
 - [uinames Generator Test Page](https://phantauth.net/_uinames/test/user) (client side generator using https://uinames.com)
 - [Mockaroo Generator Test Page](https://phantauth.net/_mockaroo/test/user) (client side generator using https://mockaroo.com)
 
-A véletlenszerűen generált felhasználókhoz profile oldal is készül, melyen a profil adatok egy egyszerű egyoldalas formában megtekinthetők.
+Every random generated user has a profile page, which contains their profile data in a simple one-page format.
 
 Profile examples:
 
