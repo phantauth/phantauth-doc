@@ -36,8 +36,8 @@ property                    | leírás
 [flags](#flags)             | login oldalt befolyásoló generator flag-ek
 [theme](#theme)             | Bootstrap theme címe
 [template](#template)       | HTML oldal template-ek címe
-[factory](#factory)         | külső user/client generator címe
-[depot](#depot)             | külső user/client adatbázis címe
+[factory](#factory)         | külső user generator címe
+[depot](#depot)             | külső user adatbázis címe
 [sheet](#sheet)             | user adatbázist tartalmazó Google Sheet azonosítója
 [script](#script)           | a HTML oldalakra beszúrandó JavaScript URL-je
 [summary](#summary)         | a tenant egy soros summary-ja
@@ -58,7 +58,7 @@ A tenant működését befojásoló flageket tartalmazó paraméter (lásd [Flag
 
 ### theme
 
-A tenant-ok HTML oldalainak template-jei a Bootstrap library használatával készültek. Ennek kösöznhetően az oldalak kinézete, színei külső Bootstrap CSS file-okkal testreszabhatók. A `theme` paraméter az oldalakon használandó Bootstrap CSS file URL-jét tartalmazza. Megadása nem kötelező, hiánya esetén a [PhantAuth developer portal](https://www.phantauth.net)-on látható default kinézettel jelennek meg a tenant HTML oldalai.
+A tenant-ok HTML oldalainak template-jei a Bootstrap library használatával készültek. Ennek köszönhetően az oldalak kinézete, színei külső Bootstrap CSS file-okkal testreszabhatók. A `theme` paraméter az oldalakon használandó Bootstrap CSS file URL-jét tartalmazza. Megadása nem kötelező, hiánya esetén a [PhantAuth developer portal](https://www.phantauth.net)-on látható default kinézettel jelennek meg a tenant HTML oldalai.
 
 ### template
 
@@ -81,15 +81,15 @@ consent.html | bejelentkezés során használt consent oldal
 team.html    | felhasználói csoport profile oldal
 client.html  | client profile oldal
 fleet.html   | client csoport profile oldal
-policy.html  | tenant privacy policy
-tos.html     | tenant term of service
+policy.html  | client privacy policy
+tos.html     | client term of service
 test.html    | user generátor és OpenID Connect login test oldal
 
 Saját template-ek használatával az oldalak teljes mértékben testreszabhatóak. A template-ek kifejtéséhez [Thymeleaf](https://www.thymeleaf.org/) template engine használatos, mely rugalmas template lehetőségeket biztosít. A default template-ek forrása a [phantauth-default](https://github.com/phantauth/phantauth-default) GitHub repository-ban elérhető. Saját template-ek készítése során célszerű ezekből a template-ekből kiindulni.
 
 ### factory
 
-A PhantAuth lehetőséget ad saját random resource (user, team, client, fleet) generator használatára, melynek címét a `factory` tenant paraméterben lehet megadni. A paraméter értéke egy [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) kifejezés. Az URI template a `kind` paraméterben kapja meg a generálandó objektum típusát (user, team), a `name` paraméterben pedig a generálandó objektum azonosítóját.
+A PhantAuth lehetőséget ad saját random resource (user, team) generator használatára, melynek címét a `factory` tenant paraméterben lehet megadni. A paraméter értéke egy [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) kifejezés. Az URI template a `kind` paraméterben kapja meg a generálandó objektum típusát (user, team), a `name` paraméterben pedig a generálandó objektum azonosítóját.
 
 ### factories
 
