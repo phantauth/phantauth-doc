@@ -7,6 +7,8 @@
 
 - [Tenant](tenant.md)
 
+- [Deploy](deploy.md)
+
 - [API](api.md)
 
 - Press Release

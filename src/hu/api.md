@@ -7,17 +7,19 @@ Random User Generator + OpenID Connect Provider. Like Lorem Ipsum, but for user 
 
 ## User [/user]
 
+A *user* resource az [OpenID Connect Core](https://openid.net/specs/openid-connect-core-1_0.html) specifikációban definiált [Standard Claims](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)-eket tartalmazza, kiegészítve néhány PhantAuth specifikus property-vel.
+
 ### Get a User [GET /user/{username}]
 
-Get
+Ezen végpont használatával véletlenszerű felhasználó generálható. A generálás a path paraméterként megadott felhasználó név alapján történik, determinisztikus módon. Ugyanazon felhasználói név esetén a végpont ugyanazt a user objektumot generálja. A generált user objektum property-ei a felhasználó név alapján véletlenszerűen generálódnak.
+A felhasználó név elhagyása esetén minden hívás különböző, véletlenszerűen generált felhasználó névhez tartozó user objektumot generál.
 
 + Parameters
-   + username (optional, string) ... username or email
+   + username (optional, string) ... a generáláshoz használt username vagy email
 
 + Response 200 (application/json)
 
     + Attributes (User)
-
 
     + Body
     
@@ -56,7 +58,11 @@ Get
 
 ### Create a User Selfie [POST]
 
-Create self contained token (selfie token) from user registration data.
+Selfie token létrehozása felhasználói adatokból. A válasz egy opaqe string token, mely a request-ben küldött user property-ket tartalmazza titkosítot formában.
+A selfie token a későbbiekben felhasználható mint belépési név. Ilyenkor a felhasználó adatait a selfie token hordozza, azaz a felhasználó property-jei a token-ből kerülnek kiolvasásra.
+A selfie token segítségével lehetőség saját felhasználói objektumok használatára authentikáció során.
+
+Használatát limitálja viszonylag nagy mérete (nagyobb mint 100 karakter), mely sok rendszerben meghaladja a megengedett maximális felhasználói név méretét.
 
 + Request (application/json)
 
@@ -99,7 +105,9 @@ Create self contained token (selfie token) from user registration data.
 
 ### Get a User Token [GET /user/{username}/token/{kind}{?scope}]
 
-Get a user token.
+Különböző OpenID Connect token-ek generálása a path paraméterként megadott nevű felhasználóhoz.
+
+Elsősorban tesztelés során használatos, amikor pl a normál authentication flow során kapott token nem elérhető s teszt kód számára.
 
 + Parameters
 
@@ -126,9 +134,11 @@ Get a user token.
 
 ## Client [/client]
 
+
 ### Get a Client [GET /client/{client_id}]
 
-Get
+Ezen végpont használatával véletlenszerű kliens generálható. A generálás a path paraméterként megadott client id alapján történik, determinisztikus módon. Ugyanazon client id esetén a végpont ugyanazt a client objektumot generálja. A generált client objektum property-ei a client id alapján véletlenszerűen generálódnak.
+A client id elhagyása esetén minden hívás különböző, véletlenszerűen generált client id-hez tartozó client objektumot generál.
 
 + Parameters
    + client_id (optional, string) ... client id or email
@@ -155,7 +165,9 @@ Get
 
 ### Create a Client Selfie [POST]
 
-Create self contained token (selfie token) from client registration data.
+Selfie token létrehozása client adatokból. A válasz egy opaqe string token, mely a request-ben küldött client property-ket tartalmazza titkosítot formában.
+A selfie token a későbbiekben felhasználható mint client id. Ilyenkor a client adatait a selfie token hordozza, azaz a client property-jei a token-ből kerülnek kiolvasásra.
+A selfie token segítségével lehetőség saját client objektumok használatára authentikáció során.
 
 + Request (application/json)
 
@@ -183,7 +195,9 @@ Create self contained token (selfie token) from client registration data.
 
 ### Get a Client Token [GET /client/{client_id}/token/{kind}]
 
-Get a client token.
+Különböző OpenID Connect token-ek generálása a path paraméterként megadott nevűcliend id-jű client-hez.
+
+Elsősorban tesztelés során használatos, amikor pl a normál authentication flow során kapott token nem elérhető s teszt kód számára.
 
 + Parameters
 
@@ -208,7 +222,8 @@ Get a client token.
 
 ### Get a Team [GET /team/{teamname}]
 
-Get
+Ezen végpont használatával felhasználók egy csoportja generálható véletlenszerűen. A generálás a path paraméterként megadott team név alapján történik, determinisztikus módon. Ugyanazon team név esetén a végpont ugyanazt a team objektumot generálja. A generált team objektum member user-ei és team property-ei a team név alapján véletlenszerűen generálódnak.
+A team név elhagyása esetén minden hívás különböző, véletlenszerűen generált team névhez tartozó team objektumot generál.
 
 + Parameters
    + teamname (optional, string) ... teamname or email
@@ -396,7 +411,8 @@ Get
 
 ### Get a Fleet [GET /fleet/{fleetname}]
 
-Get
+Ezen végpont használatával client-ek egy csoportja generálható véletlenszerűen. A generálás a path paraméterként megadott fleet név alapján történik, determinisztikus módon. Ugyanazon fleet név esetén a végpont ugyanazt a fleet objektumot generálja. A generált fleet objektum member client-jei és fleet property-ei a fleet név alapján véletlenszerűen generálódnak.
+A fleet név elhagyása esetén minden hívás különböző, véletlenszerűen generált fleet névhez tartozó fleet objektumot generál.
 
 + Parameters
    + fleetname (optional, string) ... fleetname or email
@@ -436,8 +452,8 @@ Get
                         "client_uri": "https://phantauth.net/client/otcom%7Ekzwnwi3dcjc/profile",
                         "logo_uri": "https://www.gravatar.com/avatar/102ea74126cec525eded6e2511ee4960?s=256&d=https%3A%2F%2Favatars.phantauth.net%2Ficon%2FQBeXrkby.png",
                         "tos_uri": "https://phantauth.net/client/otcom%7Ekzwnwi3dcjc/tos",
-                        "policy_uri": "https://phantauth.net/client/otcom%7Ekzwnwi3dcjc/policy",
                         "software_id": "RqrMOl5ZNZeEoYNkCdg1AA",
+                        "policy_uri": "https://phantauth.net/client/otcom%7Ekzwnwi3dcjc/policy",
                         "software_version": "8.0.9",
                         "@id": "https://phantauth.net/client/otcom%7Ekzwnwi3dcjc"
                     },
@@ -487,7 +503,10 @@ Get
 
 ### Get a Tenant [GET /tenant/{tenantname}]
 
-Get
+Ezen végpont segítségével egy adott PhantAuth tenant adatai kérdezhetők le. A PhantAuth szolgáltatások igénybevételéhez nincs szükség ezen végpont használatára.
+Elsősorban tehát debug/diagnosztikai céllal használatos tenant customizáció során.
+
+A tenantname a lekérdezni kívánt tenant teljes DNS domain neve. Official és shared tenant-ok esetén (phantauth.net és phantauth.cf DNS domain) a DNS domain elhagyható (pl *default* vagy *faker*).
 
 + Parameters
    + tenantname (required, string) ... tenantname
@@ -521,7 +540,10 @@ Get
 
 ### Get a Domain [GET /domain/{domainname}]
 
-Get
+Ezen végpont segítségével egy adott PhantAuth domain adatai kérdezhetők le. A PhantAuth szolgáltatások igénybevételéhez nincs szükség ezen végpont használatára.
+Elsősorban tehát debug/diagnosztikai céllal használatos tenant customizáció során.
+
+A domainname a lekérdezni kívánt domain teljes DNS domain neve (pl *phantauth.net* vagy *phantauth.cf*).
 
 + Parameters
    + domainname (required, string) ... domainname
@@ -530,34 +552,399 @@ Get
 
     + Attributes (Domain)
 
+    + Body
+    
+            {
+                "profile": "https://phantauth.net/domain/phantauth.net/profile",
+                "sub": "phantauth.net",
+                "logo": "https://www.phantauth.net/logo/phantauth-logo.svg",
+                "name": "PhantAuth Domain",
+                "@id": "https://phantauth.net/domain/phantauth.net",
+                "members": [
+                    {
+                        "issuer": "https://phantauth.net",
+                        "sub": "default",
+                        "subtenant": false,
+                        "domain": false,
+                        "logo": "https://default.phantauth.net/logo/phantauth-logo-light.svg",
+                        "favicon": "https://default.phantauth.net/logo/phantauth-favicon.png",
+                        "template": "https://default.phantauth.net{/resource}",
+                        "website": "https://phantauth.net",
+                        "name": "PhantAuth Default",
+                        "@id": "https://phantauth.net/tenant/default"
+                    },
+                    {
+                        "issuer": "https://phantauth.net/_gods",
+                        "sub": "gods",
+                        "subtenant": false,
+                        "domain": false,
+                        "depot": "https://docs.google.com/spreadsheets/d/1Xa4mRcLWroJr2vUDhrJXGBcobYmpS8fNZxFpXw-M9DY/gviz/tq?tqx=out:csv",
+                        "depots": [
+                            "user",
+                            "team"
+                        ],
+                        "flags": "medium",
+                        "logo": "https://cdn.staticaly.com/favicons/www.theoi.com",
+                        "favicon": "https://default.phantauth.net/logo/phantauth-favicon.png",
+                        "theme": "https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/sandstone/bootstrap.min.css",
+                        "attribution": "God pictures come from  [Theoi Project](https://www.theoi.com/), a site exploring Greek mythology and the gods in classical literature and art.",
+                        "template": "https://default.phantauth.net{/resource}",
+                        "website": "https://phantauth.net/_gods",
+                        "name": "Greek Gods",
+                        "@id": "https://phantauth.net/_gods/tenant/gods"
+                    },
+                    {
+                        "issuer": "https://phantauth.net/_casual",
+                        "sub": "casual",
+                        "subtenant": false,
+                        "domain": false,
+                        "logo": "https://www.phantauth.net/logo/phantauth-logo-gray.svg",
+                        "favicon": "https://default.phantauth.net/logo/phantauth-favicon.png",
+                        "theme": "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
+                        "template": "https://default.phantauth.net{/resource}",
+                        "factories": [
+                            "user"
+                        ],
+                        "website": "https://phantauth.net/_casual",
+                        "name": "PhantAuth Casual",
+                        "factory": "https://wt-51217f7b3eee6aead0123eeafe3b83e8-0.sandbox.auth0-extend.com/user{?name}",
+                        "@id": "https://phantauth.net/_casual/tenant/casual"
+                    },
+                    {
+                        "issuer": "https://phantauth.net/_faker",
+                        "sub": "faker",
+                        "subtenant": false,
+                        "domain": false,
+                        "flags": "small",
+                        "logo": "https://phantauth-faker.now.sh/faker-logo.svg",
+                        "favicon": "https://default.phantauth.net/logo/phantauth-favicon.png",
+                        "theme": "https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/united/bootstrap.min.css",
+                        "template": "https://default.phantauth.net{/resource}",
+                        "factories": [
+                            "team",
+                            "user"
+                        ],
+                        "website": "https://phantauth.net/_faker",
+                        "name": "PhantAuth Faker",
+                        "factory": "https://faker.phantauth.net/api{/kind,name}",
+                        "@id": "https://phantauth.net/_faker/tenant/faker"
+                    },
+                    {
+                        "issuer": "https://phantauth.net/_uinames",
+                        "sub": "uinames",
+                        "subtenant": false,
+                        "domain": false,
+                        "flags": "small",
+                        "logo": "https://uinames.com/assets/img/ios-precomposed.png",
+                        "favicon": "https://default.phantauth.net/logo/phantauth-favicon.png",
+                        "theme": "https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/minty/bootstrap.min.css",
+                        "attribution": "User data generated using [uinames.com API](https://uinames.com).",
+                        "template": "https://default.phantauth.net{/resource}",
+                        "website": "https://phantauth.net/_uinames",
+                        "name": "uinames",
+                        "@id": "https://phantauth.net/_uinames/tenant/uinames",
+                        "script": "https://www.phantauth.net/selfie/uinames.js"
+                    },
+                    {
+                        "issuer": "https://phantauth.net/_chance",
+                        "sub": "chance",
+                        "subtenant": false,
+                        "domain": false,
+                        "flags": "small",
+                        "logo": "https://phantauth-chance.now.sh/chance-logo.png",
+                        "favicon": "https://default.phantauth.net/logo/phantauth-favicon.png",
+                        "theme": "https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/united/bootstrap.min.css",
+                        "template": "https://default.phantauth.net{/resource}",
+                        "factories": [
+                            "user",
+                            "team"
+                        ],
+                        "website": "https://phantauth.net/_chance",
+                        "name": "PhantAuth Chance",
+                        "factory": "https://chance.phantauth.net/api{/kind,name}",
+                        "@id": "https://phantauth.net/_chance/tenant/chance"
+                    },
+                    {
+                        "issuer": "https://phantauth.net/_sketch",
+                        "sub": "sketch",
+                        "subtenant": false,
+                        "domain": false,
+                        "flags": "sketch;small",
+                        "logo": "https://www.phantauth.net/logo/phantauth-sketch.svg",
+                        "favicon": "https://default.phantauth.net/logo/phantauth-favicon.png",
+                        "theme": "https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/sketchy/bootstrap.min.css",
+                        "template": "https://default.phantauth.net{/resource}",
+                        "website": "https://phantauth.net/_sketch",
+                        "name": "PhantAuth Sketch",
+                        "@id": "https://phantauth.net/_sketch/tenant/sketch"
+                    },
+                    {
+                        "issuer": "https://phantauth.net/_randomuser",
+                        "sub": "randomuser",
+                        "subtenant": false,
+                        "domain": false,
+                        "flags": "small",
+                        "logo": "https://cdn.staticaly.com/favicons/randomuser.me",
+                        "favicon": "https://default.phantauth.net/logo/phantauth-favicon.png",
+                        "theme": "https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/sandstone/bootstrap.min.css",
+                        "attribution": "User data generated using [RANDOM USER GENERATOR](https://randomuser.me/).",
+                        "template": "https://default.phantauth.net{/resource}",
+                        "website": "https://phantauth.net/_randomuser",
+                        "name": "RANDOM USER",
+                        "@id": "https://phantauth.net/_randomuser/tenant/randomuser",
+                        "script": "https://www.phantauth.net/selfie/randomuser.js"
+                    },
+                    {
+                        "issuer": "https://phantauth.net/_mockaroo",
+                        "sub": "mockaroo",
+                        "subtenant": false,
+                        "domain": false,
+                        "flags": "small",
+                        "logo": "https://www.phantauth.net/selfie/kongaroo.svg",
+                        "favicon": "https://default.phantauth.net/logo/phantauth-favicon.png",
+                        "theme": "https://stackpath.bootstrapcdn.com/bootswatch/4.2.1/minty/bootstrap.min.css",
+                        "attribution": "User data generated using [Mockaroo's Mock APIs](https://mockaroo.com/mock_apis).",
+                        "template": "https://default.phantauth.net{/resource}",
+                        "website": "https://phantauth.net/_mockaroo",
+                        "name": "Mockaroo",
+                        "@id": "https://phantauth.net/_mockaroo/tenant/mockaroo",
+                        "script": "https://www.phantauth.net/selfie/mockaroo.js"
+                    },
+                    {
+                        "issuer": "https://mockuser.ga",
+                        "sub": "mockuser.ga",
+                        "subtenant": false,
+                        "domain": false,
+                        "logo": "https://www.phantauth.net/brand/mockuser/mockuser-logo-light.svg",
+                        "favicon": "https://www.phantauth.net/brand/mockuser/mockuser-favicon.png",
+                        "theme": "https://www.phantauth.net/brand/mockuser/bootstrap-mockuser.min.css",
+                        "template": "https://default.phantauth.net{/resource}",
+                        "website": "https://www.mockuser.ga",
+                        "name": "Mock User",
+                        "@id": "https://mockuser.ga/tenant/mockuser.ga"
+                    }
+                ]
+            }    
+
 # Data Structures
 
 ## User (object)
 
-+ sub (string) - valami
-+ name (string) - name
++ sub (required, string)
+  Subject - Identifier for the User at the Issuer.
+  
++ name (optional, string)
+  User's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the End-User's locale and preferences.
+
++ address (optional, Address)
+  User's preferred postal address.
+
++ given_name (optional, string)
+  Given name(s) or first name(s) of the User.
+
++ family_name (optional, string)
+  Surname(s) or last name(s) of the User.
+
++ middle_name (optional, string)
+  Middle name(s) of the User.
+
++ nickname (optional, string)
+  Casual name of the User that may or may not be the same as the given_name.
+
++ preferred_username (optional, string)
+  Shorthand name by which the User wishes to be referred to at the Relying Party.
+
++ profile (optional, string)
+  URL of the User's profile page.
+
++ picture (optional, string)
+  URL of the User's profile picture.
+  
++ website (optional, string)
+  URL of the User's Web page or blog.
+
++ email (optional, string)
+  User's preferred e-mail address.
+
++ email_verified (optional, boolean)
+  True if the User's e-mail address has been verified; otherwise false.
+
++ gender (optional, string)
+  End-User's gender. Possible values are female and male and unknown.
+
++ birthdate (optional, string)
+  User's birthday, represented as an ISO 8601:2004 [ISO8601‑2004] YYYY-MM-DD format.
+
++ zoneinfo (optional, string)
+  String from zoneinfo time zone database representing the User's time zone. For example, Europe/Paris or America/Los_Angeles.
+
++ locale (optional, string)
+  User's locale, represented as a BCP47 [RFC5646] language tag. This is an ISO 639-1 Alpha-2 language code in lowercase and an ISO 3166-1 Alpha-2 country code in uppercase, separated by a dash.
+
++ phone_number (optional, string)
+  User's preferred telephone number.
+
++ phone_number_verified (optional, boolean)
+  True if the End-User's phone number has been verified; otherwise false.
+
++ updated_at (optional, number)
+  Time the User's information was last updated. Its value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the date/time.
+
++ me (optional, string)
+  Simplified URL of the User's profile page.
+  
++ password (optional, string)
+  User's generated password.
+
++ uid (optional, string)
+  Simplified, shortened identifier for the User at the Issuer.
+  
++ webmail (optional, string)
+  URL of User's mailbox in a web mail application. 
+
++ @id (optional, string)
+  URL of the User's JSON representation.
+
+## Address (object)
+
++ formatted (optional, string)
+  Full mailing address, formatted for display or use on a mailing label. This field MAY contain multiple lines, separated by newlines. Newlines can be represented either as a carriage return/line feed pair or as a single line feed character.
+
++ street_address (optional, string)
+  Full street address component, which MAY include house number, street name, Post Office Box, and multi-line extended street address information. This field MAY contain multiple lines, separated by newlines. Newlines can be represented either as a carriage return/line feed pair or as a single line feed character.
+
++ locality (optional, string)
+  City or locality component.
+
++ region (optional, string)
+  State, province, prefecture, or region component.
+
++ postal_code (optional, string)
+  Zip code or postal code component.
+
++ country (optional, string)
+  Country name component.
 
 ## Client (object)
 
-+ client_id (string) - valami
-+ name (string) - name
++ client_id (required, string)
+  OAuth 2.0 client identifier string.
+  
++ client_secret (optional, string)
+  OAuth 2.0 client secret string. 
+  
++ redirect_uris (optional, array[string])
+  Array of redirection URI strings for use in redirect-based flows such as the authorization code and implicit flows.
+
++ token_endpoint_auth_method  (optional, string)
+  String indicator of the requested authentication method for the token endpoint.
+
++ grant_types (optional, array[string])
+  Array of OAuth 2.0 grant type strings that the client can use at the token endpoint.
+
++ response_types (optional, array[string])
+  Array of the OAuth 2.0 response type strings that the client can use at the authorization endpoint.
+  
++ client_name (optional, string)
+  Human-readable string name of the client to be presented to the end-user during authorization.
+
++ client_uri (optional, string)
+  URL string of a web page providing information about the client.
+  
++ logo_uri (optional, string)
+  URL string that references a logo for the client.
+
++ scope (optional, string)
+  String containing a space-separated list of scope values (as described in Section 3.3 of OAuth 2.0 [RFC6749]) that the client can use when requesting access tokens.
+
++ contacts (optional, array[string])
+  Array of strings representing ways to contact people responsible for this client, typically email addresses.
+  
++ tos_uri (optional, string)
+  URL string that points to a human-readable terms of service document for the client that describes a contractual relationship between the end-user and the client that the end-user accepts when authorizing the client.
+  
++ policy_uri (optional, string)
+  URL string that points to a human-readable privacy policy document that describes how the deployment organization collects, uses, retains, and discloses personal data.
+
++ jwks_uri (optional, string)
+  URL string referencing the client's JSON Web Key (JWK) Set [RFC7517] document, which contains the client's public keys.
+  
++ jwks (optional, array[string])
+  Client's JSON Web Key Set [RFC7517] document value, which contains the client's public keys.  The value of this field MUST be a JSON object containing a valid JWK Set.
+  
++ software_id (optional, string)
+  A unique identifier string (e.g., a Universally Unique Identifier (UUID)) assigned by the client developer or software publisher used by registration endpoints to identify the client software to be dynamically registered.
+  
++ software_version (optional, string)
+  A version identifier string for the client software identified by software_id.
+
++ @id (optional, string)
+  URL of the Client's JSON representation.
+
++ logo_email (optional, string)
+  A gravatar.com logo_uri generáláshoz használatos email cím.
 
 ## Team (object)
 
-+ sub (string) - valami
++ sub (string) - subject
 + name (string) - name
++ members (optional, array[User])
+
 
 ## Fleet (object)
 
-+ sub (string) - valami
++ sub (string) - subject
 + name (string) - name
++ members (optional, array[Client])
 
 ## Tenant (object)
 
-+ sub (string) - valami
-+ name (string) - name
++ sub (required, string)
+
++ issuer
+
++ website
+
++ template
+
++ factory
+
++ factories
+
++ depot
+
++ depots
+
++ userinfo
+
++ id
+
++ name
+
++ logo
+
++ favicon
+
++ theme
+
++ script
+
++ sheet
+
++ summary
+
++ attribution
+
++ about
+
++ domain (optional, boolean)
+
++ subtenant (optional, boolean)
+
+
 
 ## Domain (object)
 
-+ sub (string) - valami
++ sub (string) - subject
 + name (string) - name
++ tenants (optional, array[Tenant])
