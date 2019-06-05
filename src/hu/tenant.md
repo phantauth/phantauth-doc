@@ -41,6 +41,7 @@ property                    | leírás
 [sheet](#sheet)             | user adatbázist tartalmazó Google Sheet azonosítója
 [script](#script)           | a HTML oldalakra beszúrandó JavaScript URL-je
 [summary](#summary)         | a tenant egy soros summary-ja
+[about](#about)             | a tenant részletesebb leírása
 [attribution](#attribution) | külső forrás megjelölés
 
 ### name
@@ -122,6 +123,10 @@ A login.html, consent.html és test.html oldalakra automatikusan beilleszthető 
 ### summary
 
 A `summary` paraméterben egy rövid, egy soros leírás, szlogen adható meg a tenant-hoz. Ez a tenant nyitó oldalán jelenik meg valamint azokon az oldalakon ahol az elérhető tenant-ok listája szerepel.
+
+### about
+
+Az `about` paraméterben adható meg részletesebb leírás a tenant-ról. Amennyiben értéke egy URL, úgy a leírás a megadott URL-ről töltődik le, ellenkező esetben az érték maga a leírás. A leírásban Markdown formázás használható.
 
 ### attribution
 
