@@ -1,10 +1,10 @@
 # Integration
 
-A PhantAuth elsősorban egy OpenID Connect Provider, mely támogatja az OpenID Connect specifikációban szereplő workflow-kat (Hybrid, Implicit, Authorization Code) valamint az OAuth 2.0 specifikációban szerepő Resource Owner grant type-ot. Az integrálás mikéntje az adott authentikációs library, vagy identity integrátor szolgáltatás lehetőségeinek megfelelően történik. Jelen dokumentum tartalmazza az integráláshoz szükséges információkat, módszereket, valamint néhány konkrét környezetbe történő integrálás lépéseit.
+Primarily, PhantAuth is an OpenID Connect Provider that supports the workflows listed in the OpenID Connect specifications (Hybrid, Implicit, Authorization Code), as well as the Resource Owner Password grant type, specified in the OAuth 2.0 specifications. The method of integration depends on the given authentication library or identity integrator service. This document contains the information and methods required for the integration, and demonstrates some steps of integration into a spcific environment.
 
 # Parameters
 
-Az integráláshoz jellemzően az alábbi paraméterek szükségesek:
+Normally, the following parameters are required for the integration:
 
 - [Issuer](#issuer)
 - [Discovery Endpoint](#discovery-endpoint)
@@ -15,17 +15,17 @@ Az integráláshoz jellemzően az alábbi paraméterek szükségesek:
 
 ## Issuer
 
-Az Issuer URL azonosítja az OpenID Connect Providert, PhantAuth default [tenant](tenant.md) esetén az értéke:
+The Issuer URL identifies the OpenID Connect Provider. For PhantAuth default [tenant](tenant.md), it takes the following value:
 
 ```
 https://phantauth.net
 ```
 
-PhantAuth esetén az Issuer URL egy dokumentációs web lap is egyben, mely tartalmazza az adott [tenant](tenant.md) használatához szükséges információkat.
+If PhantAuth is used, the Issuer URL also functions as a documentation web page that contains the information necessary for the use of the given [tenant](tenant.md).
 
 ## Discovery Endpoint
 
-Amennyiben az adott authentikációs library támogatja az OpenID Connect Discovery 1.0 specifikáció Obtain OpenID Provider Configuration Information fejezetében definiált konfigurációs protokollt, úgy nem szükséges a különböző végpontok egyedi konfiurálása. Bár a specifikáció rögzíti az Issuer URL-hez relatívan a Discovery Endpoint címét, néhány authentikációs library elvárja ennek manuális beállítását. PhantAuth default [tenant](tenant.md) esetén a Discovery Endpoint címe:
+If the given authentication library supports the configuration protocol defined in chapter "Obtain OpenID Provider Configuration Information" of the OpenID Connect Discovery 1.0 specifications, you don't need to configure each endpoint. Although the specifications define the address of the Discovery Endpoint related to the Issuer URL, some authentication libraries require manual settings. For PhantAuth default [tenant](tenant.md), the address of the Discovery Endpoint is:
 
 ```
 https://phantauth.net/.well-known/openid-configuration
@@ -33,7 +33,7 @@ https://phantauth.net/.well-known/openid-configuration
 
 ## Authorization Endpoint
 
-Mindhárom OpenID Connect Flow esetén szükséges az Authorization Endpoint címének megadása amennyiben az adott authentikációs library nem implementálja az OpenID Connect Discovery specifikációt. PhantAuth default [tenant](tenant.md) esetén az Authorization Endpoint címe:
+The address of the Authorization Endpoint is required for all three OpenID Connect Flows if the given authentication library does not implement the OpenID Connect Discovery specifications. For PhantAuth default [tenant](tenant.md), the address of the Authorization Endpoint is:
 
 ```
 https://phantauth.ml/auth/authorize
@@ -41,7 +41,7 @@ https://phantauth.ml/auth/authorize
 
 ## Token Endpoint
 
-Authorization Code Flow és Hybrid Flow esetén szükséges a Token Endpoint címének megadása amennyiben az adott authentikációs library nem implementálja az OpenID Connect Discovery specifikációt. PhantAuth default [tenant](tenant.md) esetén az Token Endpoint címe:
+For the Authorization Code Flow and Hybrid Flow, you have to specify the Token Endpoint address, if the given authentication library does not implement the OpenID Connect Discovery specifications. For PhantAuth default [tenant](tenant.md), the address of the Token Endpoint is:
 
 ```
 https://phantauth.ml/auth/token
@@ -49,19 +49,19 @@ https://phantauth.ml/auth/token
 
 ## Client Credentials
 
-Az OAuth 2.0 és OpenID Connect provider-ekhez (mint a PhantAuth) történő integrálódáshoz a kliens programnak szüksége van két alapvető credential értékre, a `client_id`-re és a `client_secret`-re.
+To integrate with the OAuth 2.0 and OpenID Connect providers (similar to PhantAuth), the client program requires two essential credential values:  `client_id` and `client_secret`.
 
-A legtöbb OpenID Connect Provider-től eltérően PhantAuth használata esetén nem szükséges a kliens programot előre regisztrálni. A kliens minen adata a `client_id`-ből generálódik, mely generálható véletlenszerűen vagy megadható testreszabott módon.
+Contrary to the majority of OpenID Connect Providers, PhantAuth doesn't require a pre-registered client program. All client data is generated from the `client_id`, either in a random or a customized way.
 
 ### Random client_id
 
-Automata tesztekhez vagy a PhantAuth kipróbálásához tökéletesen megfelelnek a véletlenszerűen generált kliensek. Ez esetben nem szempont hogy a felhasználó milyen kliens nevet vagy logo-t lát pl a consent lapont. Véletlenszerűen generált kliens készítéséhez egyszerűen el le kell kérni a PhantAuth generátorának client végpontját paraméterek nélkül s minden alkalommal új véletlenszerűen generált klienst kapunk.
+The randomly generated clients are perfect for automated tests, or for trying PhantAuth. In this case, the client name or logo that the user can see, for example, on the consent page is irrelevant. To create a randomly generated client, you simply need to get the client endpoint of the PhantAuth generator without parameters and on each occasion, you'll get a new randomly generated client.
 
 ```bash
 curl https://phantauth.net/client
 ```
 
-A válaszban a generált kliens jellemzői között megtalálható a `client_id` és `client_secret` értéke.
+In the response, the properties of the generated client will include the values of the `client_id` and `client_secret`.
 
 ```json
 {
@@ -79,33 +79,33 @@ A válaszban a generált kliens jellemzői között megtalálható a `client_id`
 }
 ```
 
-Ez esetben a kliens logo-ja a válaszban szereplő `logo_email` email címhez tartozó gravatar kép lesz, mely a gravatar.com használatával akár testre is szabható.
+In this case, the client logo will be the gravatar picture that belongs to the email address associated with the `logo_email` in the response. The picture can be customized on gravatar.com.
 
 ### Customized client_id
 
-Különböző bemutatók, demo-k esetén célszerű testreszabott klienst használni, hogy a kliens név és logo megegyezzen a tesztelés, bemutatás alatt álló kliens nevével, logo-jával. Ennek legegyszerűbb módja, ha készítünk egy tag-elt email címet valamely ezt támogató email szolgáltatónál. Rendszerint a tag elválasztására a `+` karakter használatos.
+For a presentation or demo, it is advised to use a custom client, so that the client name and logo match the name and logo of the client used for testing or demonstration purposes. All you need to do is create a tagged email address at an email address provider that supports this solution. To separate the tag, the `+` character is normally used.
 
-Első lépésként hozzunk létre egy, a tesztelésre használt email account-ot (használhatjuk a saját email címünket is, de nem praktikus, mert mivel szerepelni fog a client_id-ben, valószínűleg több helyen megjelenik majd különböző log-okban).
+First, create an email account for testing purposes (you can also use your private email address, but it is not advised, because it will be included in the client_id and so, it will probably be used in a variety of logs).
 
 ```
 mytestaccount@PROVIDER
 ```
 
-A `PROVIDER` tetszőleges, tag-elt email címek használatát támogató szolgáltató, pl gmail.com, zoho.com, outlook.com, protonmail.com stb.
+The `PROVIDER` can be any provider that supports the use of tagged email addresses, like gmail.com, zoho.com, outlook.com, protonmail.com, etc.
 
-Ezt követően képezzünk a kliens nevével (pl "Super Toolbox") egy tag-el email címet, az esetleges space karaktereket pont karakterre cserélve (az erre a címre érkező levelek az eredeti `mytestaccount` mailbox-ba érkeznek majd).
+Then create a tagged email address with the client name (e.g. "Super Toolbox"), and replace the space characters with a dot (messages sent to this email address will be delivered to the original `mytestaccount` mailbox).
 
 ```
 mytestaccount+Super.Toolbox@PROVIDER
 ```
 
-Használjuk az így kapott email címet `client_id` értékként. A PhantAuth client végpontot ezzel a `client_id`-vel paraméterezve lekérhetők a kliens adatai, köztük a `client_id`:
+Use this email address as a `client_id` value. By setting the parameters of the PhantAuth client endpoint with this `client_id`, you can get the client data, including the `client_id`:
 
 ```bash
 curl https://phantauth.net/client/mytestaccount%2bSuper.Toolbox@gmail.com
 ```
 
-A válaszban megtaláljuk a `client_id`-hez tartozó generált `client_secret` értéket.
+The response contains the `client_secret` value generated for the `client_id`.
 
 ```json
 {
@@ -123,27 +123,27 @@ A válaszban megtaláljuk a `client_id`-hez tartozó generált `client_secret` �
 }
 ```
 
-Mint látható ez esetben a `logo_email` értéke a paraméterként megadott email cím, azaz a logo testreszabása az általunk létrehozott email cím gravatar.com avatar-jának testreszabásával megtehető. A `client_name` az általunk megadott név lesz, a pont karakterek szóközre cserélődnek, a szavak kezdőbetűi pedig nagybetűre.
+In this case, as you can see, the value of the `logo_email` is the email address given as a parameter, that is, the logo can be customized by customizing the gravatar. com avatar of the email address that you previously created. The `client_name` will be the name that you specified, the dot characters are replaced with space characters, and the initials of the words change to capital letters.
 
 ## Scope
 
-A PhantAuth támogatja az OpenID Connect specifikációban szereplő scope értékeket, így azok bármelyike használható. A felhasználó standard adatainak lekérdezéséhez az alábbi scope lista megadása szükséges:
+PhantAuth supports the scope values specified in the OpenID Connect specifications, so any of them can be used. To get the user's standard data, the following scope list is required:
 
 ```
 openid profile email phone address
 ```
 
-Bizonyos esetben a PhantAuth által visszaadott `sub` claim értéke túl hosszú az adott környezet (pl Auth0) számára. Ilyenkor használható a `uid` scope, mely az adott felhasználó rövidített felhasználói azonosítóját tartalmazó `uid` claim lekérését jelenti. Azaz a teljes támogatott scope lista:
+In certain cases, the value of the `sub` claim returned by PhantAuth may be too long for the given environment (e.g. Auth0). In such cases, you can use the `uid` scope, that is, get the `uid` claim that contains the shortened user ID of the given user. The full list of supported scopes:
 
 ```
 openid profile email phone address uid
 ```
 
-Az `uid` scope és claim nem szabványos, PhantAuth specifikus!
+The `uid` scope and claim are not standard values, they are PhantAuth-specific!
 
 ## User Info Endpoint
 
-Rendszerint az authentikációs library-k nem igénylik a User Info Endpoint beállítását (egy két kivételtől eltekintve), azonban hasznos lehet az adott felhasználó adatainak lekérdezéséhez. PhantAuth default [tenant](tenant.md) esetén az User Info Endpoint címe:
+In general (with few exceptions), the authentication libraries do not require the setting of the User Info Endpoint, however, it may be useful if you want to get the data of the given user. For PhantAuth default [tenant](tenant.md), the address of the User Info Endpoint:
 
 ```
 https://phantauth.ml/auth/userinfo
@@ -151,7 +151,7 @@ https://phantauth.ml/auth/userinfo
 
 ## Client Registration Endpoint
 
-A PhantAuth implementálja az OAuth 2.0 Dynamic Client Registration Protocol-t. Amennyiben az adott library támogatja a dinamikus regisztrációt, úgy nem szükséges a [Client Credentials](#client-credentials) pontban leírtaknak megfelelő credentials értékek beállítása. PhantAuth default [tenant](tenant.md) esetén a Client Registration Endpoint címe:
+PhantAuth implements the OAuth 2.0 Dynamic Client Registration Protocol. If the given library supports dynamic registration, you don't need to set the credential values decribed in section [Client Credentials](#client-credentials). For PhantAuth default [tenant](tenant.md), the address of the Client Registration Endpoint:
 
 ```
 https://phantauth.ml/auth/register
@@ -159,7 +159,7 @@ https://phantauth.ml/auth/register
 
 ## JWKS Endpoint
 
-Rendszerint az authentikációs library-k nem igénylik a JWKS Endpoint beállítását. PhantAuth default [tenant](tenant.md) esetén értéke:
+In general, the authentication libraries don't require the setting of the JWKS Endpoint. For PhantAuth default [tenant](tenant.md), its value is:
 
 ```
 https://phantauth.ml/auth/jwks
@@ -167,7 +167,7 @@ https://phantauth.ml/auth/jwks
 
 # Direct integration
 
-HTML/Javacript alkalmazások számára egyszerű OpenID Connect integrációs lehetőséget ad az [oidc-client](https://github.com/IdentityModel/oidc-client-js) library. E library használata során elegendő az `issuer` és a `client_id` megadása.
+The [oidc-client](https://github.com/IdentityModel/oidc-client-js) library enables the HTML/Javacript applications to easily integrate the OpenID Connect. When using this library, all you need is the `issuer` and the `client_id`.
 
 ```javascript
   Oidc.OidcClient(
@@ -183,23 +183,23 @@ HTML/Javacript alkalmazások számára egyszerű OpenID Connect integrációs le
   );
 ```
 
-Az [OpenID Connect Test Page](https://www.phantauth.net/test/oidc) oldalon kipróbálható az integráció. Az oldal forrása példaként is szolgál az integráció mikéntjére.
+To try and test the integration, you are advised to use the [OpenID Connect Test Page](https://www.phantauth.net/test/oidc). The source of the page can also be used as an example of integration.
 
 # Auth0
 
-Az [Auth0](https://auth0.com) az egyik legnépszerűbb authentikációs integrátor szolgáltatás. Segítségével a legkülönbözőbb identity provider-ek köthetők be egységes módon az alkalmazásba. A bekötött provider-ek köre az alkalmazás módosítása nélkül bővíthető, módosítható. Mivel a PhantAuth csak teszteléshez használatos, célszerű egy, az Auth0-hoz hasonló integrátoron keresztül bekötni az alkalmazásba, mert így bármikor ki-be- kapcsolható, illetve az alkalmazás különböző environment-jeihez (test, demo, stb) az alkalmazás módosítása nélkül hozzáadható.
+[Auth0](https://auth0.com) is one of the most popular authentication integrator services designed to integrate a wide variety of identity providers into an application in a uniform manner. The scope of the integrated providers can be extended or modified without having to modify the application. As PhantAuth is only used for testing purposes, you are advised to integrate it in the application by the use of an integrator similar to Auth0, which will allow you to enable or disable it at any time. Additionally, it can be added to the various environments of the application (test, demo, etc.) without having to modify the application..
 
-Az Auth0-n keresztüli integráció az Auth0 **Custom Social Connections** nevű extension-jén keresztül történik, mely az **Extensions** menüponton keresztül érhető el.
+For integration with Auth0, you need the **Custom Social Connections** extension of Auth0, which is accessible in the **Extensions** menu option.
 
 > ![extensions](../hu/img/auth0-extensions.png)
 
 > ![custom social connections](../hu/img/auth0-custom-social-connections.png)
 
-Itt a **NEW CONNECTION** gomb segítségével lehet új OpenID Connect kapcsolatot definiálni.
+To define a new OpenID Connect connection, select the **NEW CONNECTION** button.
 
 > ![new connection](../hu/img/auth0-new-connection.png)
 
-Itt a szokásos [paraméterek](#parameters) mellett meg kell adni egy JavaScript metódust, mely az `access token` birtokában lekérdezi a bejelentkezett felhasználó adatait. Ez legegyszerűbben a `userinfo endpoint` lekérdezésével tehető meg. Az alábbi kódrészlet elvégzi a lekérdezést s az egyetlen szükséges property mapping-et (Az OpenID Connect standard sub property-jét az Auth0 user_id property-jére):
+In addition to the usual [parameters](#parameters), you need a JavaScript method that, in possession of the `access token`, gets the data of the signed-in user. The simplest way is to get the `userinfo endpoint`. The below code snippet gets the parameter and completes the required property mapping (the standard sub property of the OpenID Connect on the user_id property of Auth0):
 
 ```javascript
 function(accessToken, ctx, cb) {
@@ -221,32 +221,32 @@ function(accessToken, ctx, cb) {
 }
 ```
 
-A PhantAuth [Auth0 Test Page](https://www.phantauth.net/test/auth0) oldalon kipróbálható az Auth0 integráció.
-Az oldal az *Auth0 JavaScript SDK* felhasználásával készült.
+To test the Auth0 integration, go to the PhantAuth [Auth0 Test Page](https://www.phantauth.net/test/auth0).
+The page was created by the use of the *Auth0 JavaScript SDK*.
 
 # Azure AD B2C
 
-Az Azure Active Directory B2C a Microsoft authentikációs integrációs megoldása végfelhasználói alkalmazások számára. Az OpenID Connect támogatás még csak preview státuszban van s viszonylag minimális számú property használatát teszi lehetővé. Mint identity provider integrátor, használata az Auth0-hoz hasonló előnyökkel jár, azaz az alkalmazás módosítása nélkül egyszerűen beköthető a PhantAuth a teszt környezetekbe (test, demo stb) mint identity provider.
+The Azure Active Directory B2C is a Microsoft-developed authentication integration solution for end-user applications. The OpenID Connect support is currently in preview status and allows the use of only a limited number of properties. As an identity provider integrator, it offers similar benefits when used with Auth0, that is, the application as an identity provider can be simply integrated into a PhantAuth test environment (test, demo, etc.), without any modification.
 
-Az Azure porálon az Azure AD B2C **Identity Providers* menüpontjában találhatók a bekonfigurált identity provider-ek.
+On the Azure portal, the configured identity providers are under the Azure AD B2C *Identity Providers* menu option.
 
 > ![identity providers](../hu/img/azure-identity-providers.png)
 
-Ide az **Add** gomb segítségével vehető fel új provider.
+To add a new provider, click on the **Add** button.
 
 > ![add identity provider](../hu/img/azure-add-identity-provider.png)
 
-Identity Provider type-ként **OpenID Connect**-et kell kiválasztani, majd ezt követően a **Setup this identity provider** menüpontban adhatók meg a PhantAuth paraméterek. Mivel az *OpenID Connect Discovery* támogatott a végpontok címét nem kell egyedileg beállítani, elegendő a metadata URL-t megadni. Fontos megjegyezni, hogy itt nem az `issuer` URL-t kell megadni, hanem az *OpenID Connect Discovery* specifikációban rögzített teljes metadata URL-t, azaz az issuer-t kötelezően követi a '/.well-known/openid-configuration' suffix. PhantAuth esetén a következő URL-t kell megadni:
+Select **OpenID Connect** as the identity provider type, and set the PhantAuth parameters under the **Setup this identity provider** menu option. As the *OpenID Connect Discovery* is supported, you don't need to set the individual end-point addresses, setting the metadata URL is enough. Please note that, rather than the `issuer` URL, you need to set the full metadata URL recorded in the *OpenID Connect Discovery* specifications, that is, the '/.well-known/openid-configuration' suffix will obligatorily follow the issuer. For PhantAuth, you need to set the following URL:
 
 ```
 https://phantauth.net/.well-known/openid-configuration
 ```
 
-A szokásos paramétereken kívül meg kell adni a *Response type* értékét, mely `id_token` kell legyen, valamint a *Response mode* értékét, mely `query` kell legyen.
+In addition to the usual parameters, you have to set the value of the *Response type*, which must be an `id_token`, and the value of the *Response mode*, which must be a `query`.
 
 > ![setup identity provider](../hu/img/azure-setup-identity-provider.png)
 
-A paramétereken kívül meg kell egy mappinget, mely az OpenID Connect claim-ek Azure AD B2C propery-k közötti összerendelést adja meg. Az összerendeléshez az alábbi táblázatban szereplő értékeket szükséges beállítani:
+In addition to the parameters, you also have to set a mapping, which defines how the OpenID Connect claims are assigned to the Azure AD B2C properties. To complete the assignment, you have to set the values provided in the following table:
 
 Field label | Value
 --- | ---
@@ -258,9 +258,9 @@ Email | email
 
 > ![map identity providers claims](../hu/img/azure-map-this-identity-providers-claims.png)
 
-A PhantAuth [Azure AD B2C Test Page](https://www.phantauth.net/test/azure) oldalon kipróbálható az Azure AD B2C integráció.
-Az oldal a *Microsoft Authentication Library for JavaScript (MSAL.js)* felhasználásával készült.
+To try the Azure AD B2C integration, go to the PhantAuth [Azure AD B2C Test Page](https://www.phantauth.net/test/azure).
+The page was developed by the use of the *Microsoft Authentication Library for JavaScript (MSAL.js)*.
 
 # Other Integrations
 
-A fenti példák csak szemléltető jellegűek, a PhantAuth mint standard OpenID Connect provider tetszőleges az OpenID Connect szabványt támogató környezetbe integrálható.
+The above exmples are for demonstration purposes only, PhantAuth as a standard OpenID Connect provider can be integrated in any environment that supports the OpenID Connect standard.
