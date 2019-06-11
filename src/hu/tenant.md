@@ -43,6 +43,8 @@ property                    | leírás
 [summary](#summary)         | a tenant egy soros summary-ja
 [about](#about)             | a tenant részletesebb leírása
 [attribution](#attribution) | külső forrás megjelölés
+[logo](#logo)               | a tenant logo-ja
+[favicon](#favicon)         | a tenant web lapjainak favicon-ja
 
 ### name
 
@@ -135,6 +137,14 @@ Külső adatforrás, random user generator használata esetén az `attribution` 
 ```
 randomuser	120	IN	TXT	"attribution=User data generated using [RANDOM USER GENERATOR](https://randomuser.me/)."
 ```
+
+### logo
+
+A tenant logo-jának URL-je. E címen található kép jelenik meg a tenant web lapjainak címsorában.
+
+### favicon
+
+A `favicon` paraméterben adható meg a favicon URL-je. E címen található kép jelenik meg a tenant web lapjainak látogatása során mint shortcut icon a böngészőben.
 
 ## Példák
 
