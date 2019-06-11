@@ -5,14 +5,121 @@ HOST: https://phantauth.net/
 
 Random User Generator + OpenID Connect Provider. Like Lorem Ipsum, but for user accounts and authentication.
 
-## User [/user]
+A PhantAuth API dokumentáció elérhető a következő API dokumentációs site-okon:
 
-A *user* resource az [OpenID Connect Core](https://openid.net/specs/openid-connect-core-1_0.html) specifikációban definiált [Standard Claims](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)-eket tartalmazza, kiegészítve néhány PhantAuth specifikus property-vel.
+ - [apiary](https://phantauth.docs.apiary.io)
+ - [PhantAuth Developer Portal](https://www.phantauth.net/api)
+
+### TL;DR
+
+**PhantAuth was designed to simplify testing for applications using OpenID Connect authentication by making use of random generated users.**
+
+endpoint  | address
+--------- | -------
+issuer    | https://phantauth.net
+discovery | https://phantauth.net/.well-known/openid-configuration
+
+credential    | value
+------------- | -----
+client_id     | test.client
+client_secret | UTBcWwt5
+
+## OpenID Connect
+
+The OpenID Connect Provider of PhantAuth supports the flows listed in the OpenID Connect specifications (Hybrid, Implicit, Authorization Code), as well as the Resource Owner Password grant type, specified in the OAuth 2.0 specifications. PhantAuth as an OpenID Connect Provider can be integrated with a variety of web applications, mobil applications, and  backend applications. The integration can be either direct, as in the case of the OpenID Connect Provider, or through an authentication integration service, as in the case of Auth0 or Azure Active Directory B2C. To learn more, please go to chapter [Integration](https://doc.phantauth.net/#/integration).
+
+Examples:
+
+- [Direct OpenID Connect integration](https://www.phantauth.net/test/oidc)
+- [Auth0 Social Connections integration](https://www.phantauth.net/test/auth0)
+- [Azure Active Directory B2C integration](https://www.phantauth.net/test/azure)
+
+## Random User
+
+The random user generator of PhantAuth can also be used separately, independent of the OpenID Connect Provider. You can generate an optional number of test users. In the knowledge of their user name, the data of the generated users can be regenerated at any time (OpenID Connect *sub* claim). The generated users have a unique, operational, disposable email address, a profile picture selected from one of the multiple pools of pictures, and the usual profile data. Custom email addresses and profile pictures may also be added. The random user generator of PhantAuth can be fully customized. Additionally, you can link an external generator to the application. For details,please go to chapter [Generator](https://doc.phantauth.net/#/generator).
+
+Test pages:
+
+- [Default Generator Test Page](https://phantauth.net/test/user) (embedded generator)
+- [Greek Gods Generator Test Page](https://phantauth.net/_gods/test/user) (embedded generator works from Google Sheet)
+- [Faker Generator Test Page](https://phantauth.net/_faker/test/user) (external generator using Javascript Faker library)
+- [Chance Generator Test Page](https://phantauth.net/_chance/test/user) (external generator using Javascript Chance library)
+- [Casual Generator Test Page](https://phantauth.net/_casual/test/user) (external generator using Javascript Casual library)
+- [Randomuser Generator Test Page](https://phantauth.net/_randomuser/test/user) (client side generator using https://randomuser.me)
+- [uinames Generator Test Page](https://phantauth.net/_uinames/test/user) (client side generator using https://uinames.com)
+- [Mockaroo Generator Test Page](https://phantauth.net/_mockaroo/test/user) (client side generator using https://mockaroo.com)
+
+Every random generated user has a profile page, which contains their profile data in a simple one-page format.
+
+Profile examples:
+
+- [Random Profile](https://phantauth.net/%7Ejoe.black)
+- [Random Greek God Profile](https://phantauth.net/_gods/%7Ezeus)
+- [Random Faker Profile](https://phantauth.net/_faker/%7Eharry.houdini)
+- [Random Chance Profile](https://phantauth.net/_chance/%7Epeter.pan)
+- [Random Casual Profile](https://phantauth.net/_casual/%7Ejohn.smith)
+
+## CodeSandbox
+
+The use of the random user generator and the direct integration of  the OpenID Connect is demonstrated through a set of CodeSandbox samples. The sample applications are run directly from CodeSandbox, so the source code is easy to view, edit, and test.
+
+Examples:
+
+- [Random User Generator usage exampe](https://4xyj8lw394.codesandbox.io/)
+- [OpenID Connect direct integration exampe](https://8z77681269.codesandbox.io/)
+
+## Tenants
+
+The PhantAuth is extremely versatile and customizable. You can use your own random user service, or generate users from an external .csv file or Google Sheet. You can use a set of Bootstrap themes to tailor the look and feel of the profile, morover, you can fundamentally change the same look and feel by the use of your own HTML templates. To find out more, please go to chapter [Tenant](https://doc.phantauth.net/#/tenant).
+
+To customize the application, you need to use one or more so-called tenants. A tenant can be consiered as an independent PhantAuth service. A tenant has its own random user generator endpoints and OpenID Connect endpoints.
+
+The tenants can be organised into so-called domains. Practically, a domain is a DNS zone, which contains the settings of the given tenant(s). The tenants as well as the domain can be configured by the use of DNS TXT records.
+
+In addition to the default tenant, the PhantAuth Domain contains some sample tenants, which are primarily designed to demonstrate customitability, a range of hosting possibilities, and the links to external services. In most cases, using the [default tenant](https://phantauth.net) is enough.
+
+- [PhantAuth Default](https://phantauth.net) - default tenant, based on Java Fairy library
+- [Greek Gods](https://phantauth.net/_gods) - based on Google Sheet document
+- [PhantAuth Faker](https://phantauth.net/_faker) - based on Javascript Faker library, hosted at https://now.sh
+- [PhantAuth Chance](https://phantauth.net/_chance) - based on Javascript Chance library, hosted at https://now.sh
+- [PhantAuth Casual](https://phantauth.net/_casual) - based on Javascript Casual library, hosted at https://webtask.io
+- [RANDOM USER](https://phantauth.net/_randomuser) - based on https://randomuser.me service
+- [uinames](https://phantauth.net/_uinames) - based on https://uinames.com service
+- [Mockaroo](https://phantauth.net/_mockaroo) - based on  https://mockaroo.com service
+
+Anyone can create the domain and the tenants. Sharing the tenants is facilitated by the [PhantAuth Shared Domain](https://shared.phantauth.net). A shared domain is connected to the [phantauth.cf](http://phantauth.cf) DNS zone, in which anyone can create tenant configuration notes by the use of the [FreeDNS](https://freedns.afraid.org/) service.
+
+## Pricing
+
+PhantAuth is a free open-source non-profit application. If you find this service useful and can afford, please make a small donation as a contribution to the operation costs (domain registration, service hosting, etc.)
+
+[Donate on Ko-fi](https://ko-fi.com/Q5Q0T7C7) | [Donate on Liberapay](https://liberapay.com/szkiba/donate) | [Donate on PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VXLCJ3EZRAE7G&source=url)
+
+# Group User
+
+A *user* resource az [OpenID Connect Core](https://openid.net/specs/openid-connect-core-1_0.html) specifikációban definiált [Standard Claims](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)-eket
+tartalmazza, kiegészítve néhány PhantAuth specifikus property-vel.
+
+Az itt szereplő, felhasználóval kapcsolatos műveletek használatára nincs szükség, amennyiben a PhantAuth rendszert mint OpenID Connect provider-t szeretnénk használni.
+A felhasználókat nem szükséges előre legenerálni, amennyiben a PhantAuth rendszernek szüksége van egy adott nevű felhasználó valamely adatára, úgy azt runtime legenerálja.
+A generátorok determinisztikus jellege garantálja, hogy ily módon ugyanazon felhasználói névhez mindig ugyanaz a user objektum generálódik.
+Kivétel ez alól a selfie token generálás, amikor is a megadott felhasználói adatokból készül egy, a későbbiekben belépési névként használható úgynevezett selfie token.
+
+## User [/user]
 
 ### Get a User [GET /user/{username}]
 
-Ezen végpont használatával véletlenszerű felhasználó generálható. A generálás a path paraméterként megadott felhasználó név alapján történik, determinisztikus módon. Ugyanazon felhasználói név esetén a végpont ugyanazt a user objektumot generálja. A generált user objektum property-ei a felhasználó név alapján véletlenszerűen generálódnak.
+Ezen végpont használatával véletlenszerű felhasználó generálható. A generálás a path paraméterként megadott felhasználó név alapján történik, determinisztikus módon.
+Ugyanazon felhasználói név esetén a végpont ugyanazt a user objektumot generálja. A generált user objektum property-ei a felhasználó név alapján véletlenszerűen generálódnak.
 A felhasználó név elhagyása esetén minden hívás különböző, véletlenszerűen generált felhasználó névhez tartozó user objektumot generál.
+
+A generálás `username` paramétereként email címet megadva customizálható a user picture az email címhez tartozó gravatar segítségével.
+
+Amennyiben a `username` paraméter tartalmaz minimum egy pont (`.`) vagy szóköz (` `) karaktert úgy a teljes név generálás helyett a paraméterből képződik.
+Ez esetben e karakterek szeparator szerepet töltenek be a teljes név egyes részei között (family name, given name).
+
+Az eredmény mindig egy user objektum. Amennyiben egy lépésben több user-t szeretnénk generálni, azt *Team* generálás segítségével tehetjük meg.
+A team tagjai a team névből véletlenszerűen generált felhasználók.
 
 + Parameters
    + username (optional, string) ... a generáláshoz használt username vagy email
@@ -58,9 +165,9 @@ A felhasználó név elhagyása esetén minden hívás különböző, véletlens
 
 ### Create a User Selfie [POST]
 
-Selfie token létrehozása felhasználói adatokból. A válasz egy opaqe string token, mely a request-ben küldött user property-ket tartalmazza titkosítot formában.
+Selfie token létrehozása felhasználói adatokból. A válasz egy opaqe string token, mely a request-ben küldött user property-ket tartalmazza kódolt formában.
 A selfie token a későbbiekben felhasználható mint belépési név. Ilyenkor a felhasználó adatait a selfie token hordozza, azaz a felhasználó property-jei a token-ből kerülnek kiolvasásra.
-A selfie token segítségével lehetőség saját felhasználói objektumok használatára authentikáció során.
+A selfie token segítségével lehetőség van saját felhasználói objektumok használatára authentikáció során.
 
 Használatát limitálja viszonylag nagy mérete (nagyobb mint 100 karakter), mely sok rendszerben meghaladja a megengedett maximális felhasználói név méretét.
 
@@ -108,6 +215,7 @@ Használatát limitálja viszonylag nagy mérete (nagyobb mint 100 karakter), me
 Különböző OpenID Connect token-ek generálása a path paraméterként megadott nevű felhasználóhoz.
 
 Elsősorban tesztelés során használatos, amikor pl a normál authentication flow során kapott token nem elérhető s teszt kód számára.
+Például egy access token generálásval elkerülhető az authentikáció s egyből hívható az access tokent-t igénylő művelet.
 
 + Parameters
 
@@ -117,12 +225,12 @@ Elsősorban tesztelés során használatos, amikor pl a normál authentication f
       Token type
     
       + Members
-          + 'access'
-          + 'refresh'
-          + 'authorization'
-          + 'id'
-          + 'selfie'
-          + 'plain'
+          + access
+          + refresh
+          + authorization
+          + id
+          + selfie
+          + plain
 
     + scope (optional, string) ... OpenID Connect scope
 
@@ -132,13 +240,24 @@ Elsősorban tesztelés során használatos, amikor pl a normál authentication f
     
             eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NoLnNtaXRoIiwidG9rZW5fa2luZCI6IkFDQ0VTUyIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgYWRkcmVzcyBwaG9uZSBpbmRpZWF1dGggdWlkIiwiZXhwIjoxNTU2ODg5NzcxLCJpYXQiOjE1NTY4ODkxNzF9.YBQ_6GlQ1iXjk6OKU7meJhlg3iRDEgeTqnBFdeLDJyI
 
-## Client [/client]
+# Group Client
 
+A Client objektum standard OAuth2 / OpenID Connect client property-ket tartalmaz. Az OpenID Connect flow-k hasnzálatához szükség van egy client_id-re. Bizonyos flow-k ezen kívül client_secret használatát is igénylik. A Client objektum tartalmazza a client_id és client_secret értékeket, valamint néhány, a felhasználó számára megjelenítendő property-t (pl.logo, client neve, verziója).
+
+## Client [/client]
 
 ### Get a Client [GET /client/{client_id}]
 
-Ezen végpont használatával véletlenszerű kliens generálható. A generálás a path paraméterként megadott client id alapján történik, determinisztikus módon. Ugyanazon client id esetén a végpont ugyanazt a client objektumot generálja. A generált client objektum property-ei a client id alapján véletlenszerűen generálódnak.
+Ezen végpont használatával véletlenszerű kliens generálható. A generálás a path paraméterként megadott client id alapján történik, determinisztikus módon.
+Ugyanazon client id esetén a végpont ugyanazt a client objektumot generálja. A generált client objektum property-ei a client id alapján véletlenszerűen generálódnak.
 A client id elhagyása esetén minden hívás különböző, véletlenszerűen generált client id-hez tartozó client objektumot generál.
+
+A generálás `client_id` paramétereként email címet megadva customizálható a client logo az email címhez tartozó gravatar segítségével.
+
+Amennyiben a `client_id` paraméter tartalmaz minimum egy pont (`.`) vagy szóköz (` `) karaktert úgy a client_name név generálás helyett a paraméterből képződik.
+
+Az eredmény mindig egy client objektum. Amennyiben egy lépésben több client-st szeretnénk generálni, azt *Fleet* generálás segítségével tehetjük meg.
+A fleet tagjai a fleet névből véletlenszerűen generált client-sek.
 
 + Parameters
    + client_id (optional, string) ... client id or email
@@ -195,21 +314,23 @@ A selfie token segítségével lehetőség saját client objektumok használatá
 
 ### Get a Client Token [GET /client/{client_id}/token/{kind}]
 
-Különböző OpenID Connect token-ek generálása a path paraméterként megadott nevűcliend id-jű client-hez.
+Különböző OpenID Connect token-ek generálása a path paraméterként megadott nevű client id-jű client-hez.
 
 Elsősorban tesztelés során használatos, amikor pl a normál authentication flow során kapott token nem elérhető s teszt kód számára.
 
 + Parameters
 
     + client_id (required, string) ... client id or email
-    + kind (required, enum[string]) 
+      
+    + kind (required, enum[string]) ... token kind
+      
     
       Token type
     
       + Members
-          + 'registration'
-          + 'selfie'
-          + 'plain'
+          + registration
+          + selfie
+          + plain
 
 + Response 200 (text/plain)
 
@@ -218,15 +339,21 @@ Elsősorban tesztelés során használatos, amikor pl a normál authentication f
             eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWdpYy50b29sYm94IiwidG9rZW5fa2luZCI6IlJFR0lTVFJBVElPTiIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgYWRkcmVzcyBwaG9uZSBpbmRpZWF1dGggdWlkIiwiZXhwIjoxNTg4NDI4NDM4LCJpYXQiOjE1NTY4OTI0Mzh9.TGilMHuWIDYiBAjzXyMuBvMiRlnKFLDX7FJJW_flldg
 
 
+# Group Team
+
+A Team a felhasználók egy névvel ellátott csoportja. A Team objektum az azonosíthatóság, megjeleníthetőség érdekében rendelkezik néhány saját property-el (pl logo), de legfontosabb property-je a `members`, mely a team-hez tartozó user objektumokat tartalmazza.
+
 ## Team [/team]
 
 ### Get a Team [GET /team/{teamname}]
 
-Ezen végpont használatával felhasználók egy csoportja generálható véletlenszerűen. A generálás a path paraméterként megadott team név alapján történik, determinisztikus módon. Ugyanazon team név esetén a végpont ugyanazt a team objektumot generálja. A generált team objektum member user-ei és team property-ei a team név alapján véletlenszerűen generálódnak.
+Ezen végpont használatával felhasználók egy csoportja generálható véletlenszerűen. A generálás a path paraméterként megadott team név alapján történik, determinisztikus módon.
+Ugyanazon team név esetén a végpont ugyanazt a team objektumot generálja. A generált team objektum member user-ei és team property-ei a team név alapján véletlenszerűen generálódnak.
 A team név elhagyása esetén minden hívás különböző, véletlenszerűen generált team névhez tartozó team objektumot generál.
 
 + Parameters
-   + teamname (optional, string) ... teamname or email
+   + teamname (optional, string)
+     a team azonosítója vagy email címe, ez kerül majd a `sub` property-be s ez alapján generálódik a többi property
 
 + Response 200 (application/json)
 
@@ -407,15 +534,21 @@ A team név elhagyása esetén minden hívás különböző, véletlenszerűen g
                 ]
             }
 
+# Group Fleet
+
+A Fleet a client-ek egy névvel ellátott csoportja. A Fleet objektum az azonosíthatóság, megjeleníthetőség érdekében rendelkezik néhány saját property-vel (pl logo), de legfontosabb property-je a `members`, mely a fleet-hez tartozó client objektumokat tartalmazza.
+
 ## Fleet [/fleet]
 
 ### Get a Fleet [GET /fleet/{fleetname}]
 
-Ezen végpont használatával client-ek egy csoportja generálható véletlenszerűen. A generálás a path paraméterként megadott fleet név alapján történik, determinisztikus módon. Ugyanazon fleet név esetén a végpont ugyanazt a fleet objektumot generálja. A generált fleet objektum member client-jei és fleet property-ei a fleet név alapján véletlenszerűen generálódnak.
+Ezen végpont használatával client-ek egy csoportja generálható véletlenszerűen. A generálás a path paraméterként megadott fleet név alapján történik, determinisztikus módon.
+Ugyanazon fleet név esetén a végpont ugyanazt a fleet objektumot generálja. A generált fleet objektum member client-jei és fleet property-ei a fleet név alapján véletlenszerűen generálódnak.
 A fleet név elhagyása esetén minden hívás különböző, véletlenszerűen generált fleet névhez tartozó fleet objektumot generál.
 
 + Parameters
-   + fleetname (optional, string) ... fleetname or email
+   + fleetname (optional, string)
+     a fleet azonosítója vagy email címe, ez kerül majd a `sub` property-be s ez alapján generálódik a többi property
 
 + Response 200 (application/json)
 
@@ -499,6 +632,19 @@ A fleet név elhagyása esetén minden hívás különböző, véletlenszerűen 
                 ]
             }
 
+# Group Tenant
+
+A testreszabás ún. tenant-ok segítségével történik.
+Egy egy tenant tekinthető úgy mint egy önálló PhantAuth szolgáltatás. A tenant-ok saját véletlenszerű felhasználó generátor végpontokkal valamint OpenID Connect végpontokkal rendelkeznek.
+
+A tenant-ok ún. domain-ekbe szervezhetők. A domain gyakorlatilag egy DNS zóna, mely tartalmazza az egyes tenant-ok beállításait. A tenant-ok is s a domain maga is DNS TXT rekordok segítségével konfigurálhatók.
+
+A tenant issuer URL-je `https://phantauth.net/_{tenant}` fromátumú, ahol a `tenant` a tenant teljes DNS neve. A PhantAuth official tenant-ok esetén a `phantauth.net` elhagyható a név
+végéről. A community által létrehozott, megosztott tenant-ok esetén a `phantauth.cf` elhagyható a név végéről.
+A default tenant (default.phantauth.net) esetén az issuer URL azonos a PhantAuth base URL-el, azaz [https://phantauth.net](https://phantauth.net)
+
+A resource URL-ek a tenant issuer URL-hez képest relatívak, azaz pl a random user generátor végpont címe a `faker` nevű tenant esetén: [https://phantauth.net/_faker/user](https://phantauth.net/_faker/user)
+
 ## Tenant [/tenant]
 
 ### Get a Tenant [GET /tenant/{tenantname}]
@@ -506,10 +652,11 @@ A fleet név elhagyása esetén minden hívás különböző, véletlenszerűen 
 Ezen végpont segítségével egy adott PhantAuth tenant adatai kérdezhetők le. A PhantAuth szolgáltatások igénybevételéhez nincs szükség ezen végpont használatára.
 Elsősorban tehát debug/diagnosztikai céllal használatos tenant customizáció során.
 
-A tenantname a lekérdezni kívánt tenant teljes DNS domain neve. Official és shared tenant-ok esetén (phantauth.net és phantauth.cf DNS domain) a DNS domain elhagyható (pl *default* vagy *faker*).
+A tenantname a lekérdezni kívánt tenant teljes DNS domain neve.
+Official és shared tenant-ok esetén (phantauth.net és phantauth.cf DNS domain) a DNS domain elhagyható (pl *default* vagy *faker*).
 
 + Parameters
-   + tenantname (required, string) ... tenantname
+   + tenantname (required, string) ... a tenant azonosítója, ez kerül majd a `sub` property-be
 
 + Response 200 (application/json)
 
@@ -536,6 +683,17 @@ A tenantname a lekérdezni kívánt tenant teljes DNS domain neve. Official és 
                 "@id": "https://phantauth.net/_faker/tenant/faker"
             }
 
+
+# Group Domain
+
+A Domain objektum több tenant-ot fog össze, felfogható mint a tenant-ok egy csoportja. A PhantAuth official tenant-okat a `phantauth.net` azonosítójú domain fogja össze.
+Lehetőség van saját tenant-ok megosztására s regisztrálására a `phantauth.cf` nevű domain-en belül.
+
+A domain használható tenant-ként is, azaz létezik issuer végpontja, valamint resource végpontjai is. A domain issuer URL-je `https://phantauth.net/_{domain}` fromátumú, ahol a `domain` 
+a domain teljes DNS neve, azaz pl [https://phantauth.net/_phantauth.net](https://phantauth.net/_phantauth.net) vagy
+[https://phantauth.net/_phantauth.cf](https://phantauth.net/_phantauth.cf). A default domain (phantauth.net) esetén a domain név elhagyható, azaz a 
+default domain issuer URL-je [https://phantauth.net/_](https://phantauth.net/_)
+
 ## Domain [/domain]
 
 ### Get a Domain [GET /domain/{domainname}]
@@ -546,7 +704,7 @@ Elsősorban tehát debug/diagnosztikai céllal használatos tenant customizáci�
 A domainname a lekérdezni kívánt domain teljes DNS domain neve (pl *phantauth.net* vagy *phantauth.cf*).
 
 + Parameters
-   + domainname (required, string) ... domainname
+   + domainname (required, string) ... a domain azonosítója, ez kerül majd a `sub` property-be
 
 + Response 200 (application/json)
 
@@ -886,65 +1044,140 @@ A domainname a lekérdezni kívánt domain teljes DNS domain neve (pl *phantauth
 
 ## Team (object)
 
-+ sub (string) - subject
-+ name (string) - name
++ sub (required, string)
+  A team neve vagy email címe. Ebből a névből generálódnak a team property-jei valamint a member-ei. Email cím megadásával customizálható a team logo-ja az email címhez tartozó gravatar segítségvel.
+
++ name (optional, string)
+  A team megjelenítendő neve.
+
++ logo (optional, string)
+  A team logo-jának URL-je, mely a `logo_email` property-ben szereplő email címhez tartozó gravatar segítségével customizálható.
+
++ logo_email (optional, string)
+  A team generált vagy a `sub` property-ben megadott email címe. Ezen email címhez tartozó gravatar segítségével customizálható a team logo-ja.
+
++ @id (optional, string)
+  URL of the Teams's JSON representation.
+
++ profile (optional, string)
+  A Team profile oldalának URL-je.
+
 + members (optional, array[User])
+  A team tagjait képző user objektumok.
 
 
 ## Fleet (object)
 
-+ sub (string) - subject
-+ name (string) - name
++ sub (required, string)
+  A fleet neve vagy email címe. Ebből a névből generálódnak a fleet property-jei valamint a member-ei. Email cím megadásával customizálható a fleet logo-ja az email címhez tartozó gravatar segítségvel.
+
++ name (optional, string)
+  A fleet megjelenítendő neve.
+
++ logo (optional, string)
+  A fleet logo-jának URL-je, mely a `logo_email` property-ben szereplő email címhez tartozó gravatar segítségével customizálható.
+
++ logo_email (optional, string)
+  A fleet generált vagy a `sub` property-ben megadott email címe. Ezen email címhez tartozó gravatar segítségével customizálható a fleet logo-ja.
+
++ @id (optional, string)
+  URL of the Fleet's JSON representation.
+
++ profile (optional, string)
+  A Fleet profile oldalának URL-je.
+
 + members (optional, array[Client])
+  A fleet-ben szereplő client objektmok.
 
 ## Tenant (object)
 
 + sub (required, string)
+  A tenant teljes DNS domain neve. Official és shared tenant-ok esetén (phantauth.net és phantauth.cf DNS domain) a DNS domain elhagyható (pl *default* vagy *faker*).
 
-+ issuer
++ issuer (required, string)
+  A tenant OpenID Connect issuer URL-je. Értékét felhasználva kérdezhető le pl az [OpenID Provider Metadata](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata).
+  Mint web lap, a a tenant használatával kapcsolatos információkat tartalmazza.
 
-+ website
++ website (optional, string)
+  A tenant-hoz tartozó web site címe. Amennyiben a tenant nem rendelkezik saját web site-tal, úgy értéke megegyezik az `issuer` property értékével.
 
-+ template
++ template (optional, string)
+  A tenant HTML oldalainak template-jeinek helyétadja meg [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) formátumban.
+  Az URI template egy `resource` paraméterben kapja meg az oldal nevét. Alapértelmezett értéke: `https://default.phantauth.net{/resource}`.
 
-+ factory
++ factory (optional, string)
+  Custom random resource generátor (user, team) címe [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) formátumban.
+  Az URI template a `kind` paraméterben kapja meg a generálandó objektum típusát (user, team), a `name` paraméterben pedig a generálandó objektum azonosítóját.
 
-+ factories
++ factories (optional, array[string])
+  A `factory`-ban beállított külső generátor által támogatott resource típusok listája.
 
-+ depot
++ depot (optional, string)
+  A resource adatokat tartalmazó CSV file helyét adja meg [RFC 6570 - URI temaplate](https://tools.ietf.org/html/rfc6570) formátumban.
+  Az URI template a `kind` paraméterben kapja meg a generálandó objektum típusát (user, team).
+  
+  A CSV file első sora tartalmazza a resource property neveket, a további sorok pedig az adatokat.
+  Egymásba ágyazott property-k esetén a property névben '.' karakter választja el a név egyes elemeit (pl address.formatted). 
 
-+ depots
++ depots (optional, array[string])
+  A `depot`-ban beállított külső CSV által támogatott resource típusok listája.
 
-+ userinfo
++ userinfo (optional, string)
 
-+ id
++ @id (optional, string)
+  URL of the Tenant's JSON representation.
 
-+ name
++ name (optional, string)
+  A tenant megjelenítendő neve, hiánya esetén a tenant DNS neve jelenik meg a tenant web lapjainak címsorában.
 
-+ logo
++ logo (optional, string)
+  A tenant logo-jának URL-je. E címen található kép jelenik meg a tenant web lapjainak címsorában valamint azokon az oldalakon ahol az elérhető tenant-ok listája szerepel.
 
-+ favicon
++ favicon (optional, string)
+  A tenant favicon-jának URL-je. E címen található kép jelenik meg a tenant web lapjainak látogatása során mint shortcut icon a böngészőben.
 
-+ theme
++ theme (optional, string)
+  A tenant weblapjaihoz használandó CSS style sheet URL-je.
+  A default weblap template-ek Bootstrap library használatával készültek, így használatuk esetén itt egy Bootstrap CSS URL adható meg.
 
-+ script
++ script (optional, string)
+  A login.html, consent.html és test.html oldalakra automatikusan beilleszthető egy custom JavaScript file URL-je.
 
-+ sheet
++ sheet (optional, string)
+  Egy publikus Google Sheet dokumentum azonosítója adható meg. A táblázat első sora tartalmazza a user property neveket, a további sorok pedig az adatokat.
+  Egymásba ágyazott property-k esetén a property névben '.' karakter választja el a név egyes elemeit (pl address.formatted).
 
-+ summary
++ summary (optional, string)
+  A tenant rövid, egy soros leírása, szlogenje. A tenant nyitó oldalán jelenik meg valamint azokon az oldalakon ahol az elérhető tenant-ok listája szerepel. Értéke formázás nélküli szöveg.
 
-+ attribution
++ attribution (optional, string)
+  Külső adatforrás, random user generator használata esetén az attribution. Értékében Markdown formázás használható, így megadhatók kiemelések, link-ek a külső forrásra.
 
-+ about
++ about (optional, string)
+  Részletesebb leírás a tenant-ról. Amennyiben értéke egy URL, úgy a leírás a megadott URL-ről töltődik le, ellenkező esetben az érték maga a leírás. A leírásban Markdown formázás használható.
 
 + domain (optional, boolean)
+  Több tenant-ot összefogó domain tenant estén true különben false.
 
 + subtenant (optional, boolean)
-
-
+  Domain tenant-on keresztül hivatkozott tenant estén értéke true, különben false.
 
 ## Domain (object)
 
-+ sub (string) - subject
-+ name (string) - name
-+ tenants (optional, array[Tenant])
++ sub (string)
+  A domain teljes DNS domain neve (pl phantauth.net).
+
++ name (optional, string)
+  A domain megjelenítendő neve.
+
++ logo (optional, string)
+  A domain logo-jának URL-je. E címen található kép jelenik meg a domain web lapján.
+
++ @id (optional, string)
+  URL of the Domain's JSON representation.
+  
++ profile (optional, string)
+  URL of the Domain's web page.
+
++ members (optional, array[Tenant])
+  A domain-ben szereplő tenant-ok.
