@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PhantAuth Documentation</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="PhantAuth documentation">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+  <link rel="shortcut icon" href="https://www.phantauth.ga/logo/phantauth-favicon.png" />  
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    var _domain = window.location.hostname.substring(window.location.hostname.lastIndexOf('.', window.location.hostname.lastIndexOf('.') -1 ) + 1 );
+    function domain(str) {
+        return str.replace(/phantauth.net/g, _domain);
+    }
+    window.$docsify = {
+      name: 'PhantAuth Documentation',
+      logo: domain('https://www.phantauth.net/logo/phantauth-logo.svg'),
+      themeColor: '#8a4b1b',
+      loadSidebar: true,
+      subMaxLevel: 2,
+      repo: 'https://github.com/phantauth/',
+      themeable: {
+          readyTransition : true,
+          responsiveTables: true
+      },
+      plugins: [
+        function(hook, vm) {
+          hook.beforeEach(domain)
+        }
+      ]
+    }
+  </script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
+  <script src="//unpkg.com/docsify-copy-code"></script>
+  <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-javascript.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-json.min.js"></script>
+</body>
+</html>

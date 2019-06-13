@@ -1,0 +1,17 @@
+{
+  "name": "phantauth-doc",
+  "version": "1.0.0",
+  "description": "PhantAuth Documentation",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phantauth/phantauth-doc.git"
+  },
+  "scripts": {
+    "build": "mkdir -p public; cp -rp src/hu/* public/; cp -rp src/en/* public/; cp -rp src/hu/img public/; cp src/hu/index.html public/; cp -rp src/hu public/hu; apib2swagger -i public/hu/api.md --yaml -o public/api.yaml; apib2swagger -i public/hu/api.md --json -o public/api.json"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "apib2swagger": "^1.9.2"
+  }
+}
