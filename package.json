@@ -8,10 +8,11 @@
     "url": "https://github.com/phantauth/phantauth-doc.git"
   },
   "scripts": {
-    "build": "mkdir -p public; cp -rp src/hu/* public/; cp -rp src/en/* public/; cp -rp src/hu/img public/; cp src/hu/index.html public/; cp -rp src/hu public/hu; apib2swagger -i public/hu/api.md --yaml -o public/api.yaml; apib2swagger -i public/hu/api.md --json -o public/api.json"
+    "build": "mkdir -p public; cp -rp src/hu/* public/; cp -rp src/en/* public/; cp -rp src/hu/img public/; cp src/hu/index.html public/; cp -rp src/hu public/hu; apib2swagger -i public/hu/api.md --yaml -o public/api.yaml; apib2swagger -i public/hu/api.md --json -o public/api.json; eleventy"
   },
   "dependencies": {},
   "devDependencies": {
-    "apib2swagger": "^1.9.2"
+    "apib2swagger": "^1.9.2",
+    "@11ty/eleventy": "^0.7.1"
   }
 }
