@@ -114,7 +114,7 @@ In lack of a user name, all calls generate a different user object to the random
 
 By providing an email address as the `username` parameter, you can customize the user picture by the use of the gravatar associated with the email address.
 
-If the `username` parameter contains at least one dot (`.`) or space (`) character, the whole name is produced from the parameter, rather than being generated.
+If the `username` parameter contains at least one dot (`.`) or space (` `) character, the whole name is produced from the parameter, rather than being generated.
 In this case, these cahracters play the role of separator between the units of the full name (family name, given name).`
 
 The result is always a user object. If you want to generate multiple users in one single step, you can do it by the use of *Team* generation.
@@ -253,7 +253,7 @@ In lack of a client ID, all calls generate a different client object to the rand
 
 By providing an email address as the `client_id` parameter, you can customize the client logo by the use of the gravatar associated with the email address.
 
-If the `client_id` parameter contains minimum one dot (`.`) or space (`) character, the client_name is produced from the parameter, rather than being generated.`
+If the `client_id` parameter contains minimum one dot (`.`) or space (` `) character, the client_name is produced from the parameter, rather than being generated.`
 
 The result is always a client object. If you want to generate multiple clients in one single step, you can do it by the use of *Fleet* generation.
 The members of a fleet are clients randomly generated from the fleet name.
