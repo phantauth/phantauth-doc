@@ -2,15 +2,15 @@
 
 ## Concept
 
-A PhantAuth alap koncepciója az adatok véletlenszerű, de determnisztikus generálása. Ennek megvalósítása ún. pseudorandom number generator (PRNG) használatával történik. Minden objektum típusnak van egy azonosítója (login név a user esetén, client_id a client esetén stb). Ezen azonosítóból egy adott hash algoritmus segítségével képződik a pseudorandom generator seed értéke. Ezt követően az adott objektum minden egyes jellemzője ezen seed értékről indított pseudorandom generator segítségével generálódik. A pseudorandom number generator vagy más néven deterministic random bit generator (DRBG) azon sajátosságát kihasználva, hogy ugyanazon kezdőértékről indítva ugyanazon véletlenszerű érték sorozatot állítja elő, az azonosító egyértelműen meghatározza a belőle generált objektumot. Azaz az azonosító és a generator birtokában az objektum jellemzői bármikor újragenerálhatók.
+The basic concept of PhantAuth is that it generates data in a random but deterministic way. To achieve this goal, a so-called pseudorandom number generator (PRNG) is used. Each object type has an identifier (login name for user, client_id for client, etc.) By using a given hash algorithm, the value of the pseudorandom generator seed is produced from this identifier. Then, every property of the given object is generated with the pseudorandom generator started from this seed value. Taking advantage of the special feature of the pseudorandom number generator, also called as deterministic random bit generator (DRBG), that is, it generates the same random value series started from the same seed, the identifier clearly defines the object generated from it. That is, by the use of an identifier and generator, you can regenarate the properties of a given object at any time.
 
-A fenti koncepciónak köszönhetően a teljes PhantAuth szolgáltatás állapot mentes, nincs szükség háttértároló használatára. Így például egy tetszőlegsen választott bejelentkezési név "létezni" fog, s előállíthatók a hozzá "tartozó" felhasználó jellemzői.
+Based on the above concept, PhantAuth is absolutely stateless, and no storage medium is necessary. So, a randomly selected login name will "exist", and the properties of the "associated" user can be generated.
 
 ## Identifier
 
 In brief, an object is defined by its identifier. The name of the identifier of a user or client object is `sub` or `client_id` used in the OpenID Connect specifications. The name of the identifier property of other PhantAuth-specific objects that are not included in the specifications is `sub`.
 
-Az azonosító tetszőleges karaktereket tartalmazhat.
+The identifier may contain any character.
 
 ## Customization
 
