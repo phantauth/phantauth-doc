@@ -24,7 +24,7 @@ In a nutshell, to create a tenant, you have the following options:
 
 - With TXT records created in a second- or third level domain shared with a community, by using FreeDNS.
 
-- Saját létező DNS domain-ben létrehozott TXT rekordok segítségével tetszőleges DNS software használatával
+- With TXT records created in your own existing DNS domain, by the use of an any DNS software.
 
 ## Parameters
 
@@ -125,7 +125,7 @@ You can automatically insert a custom JavaScript file in the login.html, consent
 
 ### summary
 
-A `summary` paraméterben egy rövid, egy soros leírás, szlogen adható meg a tenant-hoz. Ez a tenant nyitó oldalán jelenik meg valamint azokon az oldalakon ahol az elérhető tenant-ok listája szerepel.
+You can provide a short, one-line description, a watchword for the tenant in the `summary` parameter. It appears on the tenant's startup page and all the pages that contain a list of available tenants.
 
 ### about
 
