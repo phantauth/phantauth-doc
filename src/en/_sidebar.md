@@ -7,7 +7,3 @@
 - [Tenant](tenant.md)
 
 - [API](api.md)
-
-- Press Release
-
-    - [Medium](medium.md)
