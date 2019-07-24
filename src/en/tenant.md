@@ -1,6 +1,10 @@
-# Tenant
+---
+path: "/doc/tenant"
+title: "Tenant"
+index: 3
+---
 
-## Concept
+# Tenant
 
 The internal structure of PhantAuth is modular enough to allow certain elements to be customized or even replaced. The customized PhantAuth instances can be considered as separate services, which are independent from the original one. For the sake of simplicity, the customized PhantAuth instances will be called **tenants**. 
 

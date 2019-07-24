@@ -1,3 +1,9 @@
+---
+path: "/doc"
+title: "Introduction"
+index: 0
+---
+
 # PhantAuth
 
 > Random User Generator + OpenID Connect Provider.
@@ -69,7 +75,7 @@ To customize the application, you need to use one or more so-called tenants. A t
 
 The tenants can be organised into so-called domains. Practically, a domain is a DNS zone, which contains the settings of the given tenant(s). The tenants as well as the domain can be configured by the use of DNS TXT records.
 
-In addition to the default tenant, the PhantAuth Domain contains some sample tenants, which are primarily designed to demonstrate customitability, a range of hosting possibilities, and the links to external services. In most cases, using the [default tenant](https://phantauth.net) is enough.
+In addition to the default tenant, the PhantAuth domain contains some sample tenants, which are primarily designed to demonstrate customizability, a range of hosting possibilities, and the links to external services. In most cases, using the [default tenant](https://phantauth.net) is enough.
 
 - [PhantAuth Default](https://phantauth.net) - default tenant, based on Java Fairy library
 - [Greek Gods](https://phantauth.net/_gods) - based on Google Sheet document
@@ -80,10 +86,10 @@ In addition to the default tenant, the PhantAuth Domain contains some sample ten
 - [uinames](https://phantauth.net/_uinames) - based on https://uinames.com service
 - [Mockaroo](https://phantauth.net/_mockaroo) - based on  https://mockaroo.com service
 
-Anyone can create the domain and the tenants. Sharing the tenants is facilitated by the [PhantAuth Shared Domain](https://shared.phantauth.net). A shared domain is connected to the [phantauth.cf](http://phantauth.cf) DNS zone, in which anyone can create tenant configuration notes by the use of the [FreeDNS](https://freedns.afraid.org/) service.
+Anyone can create the domain and the tenants. Sharing the tenants is facilitated by the [PhantAuth Shared Domain](https://shared.phantauth.net). A shared domain is connected to the [phantauth.cf](http://phantauth.cf) DNS zone, in which anyone can create tenant configuration nodes by the use of the [FreeDNS](https://freedns.afraid.org/) service.
 
 ## Pricing
 
-PhantAuth is a free open-source non-profit application. If you find this service useful and can afford, please make a small donation as a contribution to the operation costs (domain registration, service hosting, etc.)
+PhantAuth is a free [open-source](https://github.com/phantauth) non-profit application. If you find this service useful and can afford, please make a small donation as a contribution to the operation costs (domain registration, service hosting, etc.)
 
 [Donate on Ko-fi](https://ko-fi.com/Q5Q0T7C7) | [Donate on Liberapay](https://liberapay.com/szkiba/donate) | [Donate on PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VXLCJ3EZRAE7G&source=url)
