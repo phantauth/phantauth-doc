@@ -1,3 +1,9 @@
+---
+path: "/doc/generator"
+title: "Generator"
+index: 2
+---
+
 # Generator
 
 The basic concept of PhantAuth is that it generates data in a random but deterministic way. To achieve this goal, a so-called pseudorandom number generator (PRNG) is used. Each object type has an identifier (login name for user, client_id for client, etc.) By using a given hash algorithm, the value of the pseudorandom generator seed is produced from this identifier. Then, every property of the given object is generated with the pseudorandom generator started from this seed value. Taking advantage of the special feature of the pseudorandom number generator, also called as deterministic random bit generator (DRBG), that is, it generates the same random value series started from the same seed, the identifier clearly defines the object generated from it. That is, by the use of an identifier and generator, you can regenarate the properties of a given object at any time.
@@ -112,4 +118,4 @@ PhantAuth can use external data sources and generators as well. The only restric
 
 A special case of external generators is if an external data source is used. In such cases, the properties of a given object can be provided in a comma separated value (CSV) file or a Google Sheets document.
 
-The external data sources and generators can be defined by the use of so-called [tenants](tenant.md). To learn more, please go to chapter [Tenant](tenant.md).
+The external data sources and generators can be defined by the use of so-called [tenants](tenant). To learn more, please go to chapter [Tenant](tenant).

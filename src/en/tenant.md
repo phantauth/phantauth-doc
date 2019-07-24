@@ -1,6 +1,10 @@
-# Tenant
+---
+path: "/doc/tenant"
+title: "Tenant"
+index: 3
+---
 
-## Concept
+# Tenant
 
 The internal structure of PhantAuth is modular enough to allow certain elements to be customized or even replaced. The customized PhantAuth instances can be considered as separate services, which are independent from the original one. For the sake of simplicity, the customized PhantAuth instances will be called **tenants**. 
 
@@ -52,7 +56,7 @@ The displayed name of the tenant is defined in the `name` parameter. In lack of 
 
 ### flags
 
-This parameter contains the flags that affect the operation of a tenant (see [Flags](generator.md#flags)). Currently, the flags affecting the team size are used in the login screen. If any of the flags is a team size flag, you can select the user from a list in the login screen, rather than using an input field. It can take the following values:
+This parameter contains the flags that affect the operation of a tenant (see [Flags](generator#flags)). Currently, the flags affecting the team size are used in the login screen. If any of the flags is a team size flag, you can select the user from a list in the login screen, rather than using an input field. It can take the following values:
 
 - tiny
 - small
