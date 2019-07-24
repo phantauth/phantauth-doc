@@ -112,4 +112,4 @@ PhantAuth can use external data sources and generators as well. The only restric
 
 A special case of external generators is if an external data source is used. In such cases, the properties of a given object can be provided in a comma separated value (CSV) file or a Google Sheets document.
 
-The external data sources and generators can be defined by the use of so-called [tenants](tenant.md). To learn more, please go to chapter [Tenant](tenant.md).
+The external data sources and generators can be defined by the use of so-called [tenants](tenant). To learn more, please go to chapter [Tenant](tenant).

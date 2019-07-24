@@ -15,17 +15,17 @@ Normally, the following parameters are required for the integration:
 
 ## Issuer
 
-The Issuer URL identifies the OpenID Connect Provider. For PhantAuth default [tenant](tenant.md), it takes the following value:
+The Issuer URL identifies the OpenID Connect Provider. For PhantAuth default [tenant](tenant), it takes the following value:
 
 ```
 https://phantauth.net
 ```
 
-If PhantAuth is used, the Issuer URL also functions as a documentation web page that contains the information necessary for the use of the given [tenant](tenant.md).
+If PhantAuth is used, the Issuer URL also functions as a documentation web page that contains the information necessary for the use of the given [tenant](tenant).
 
 ## Discovery Endpoint
 
-If the given authentication library supports the configuration protocol defined in chapter "Obtain OpenID Provider Configuration Information" of the OpenID Connect Discovery 1.0 specifications, you don't need to configure each endpoint. Although the specifications define the address of the Discovery Endpoint related to the Issuer URL, some authentication libraries require manual settings. For PhantAuth default [tenant](tenant.md), the address of the Discovery Endpoint is:
+If the given authentication library supports the configuration protocol defined in chapter "Obtain OpenID Provider Configuration Information" of the OpenID Connect Discovery 1.0 specifications, you don't need to configure each endpoint. Although the specifications define the address of the Discovery Endpoint related to the Issuer URL, some authentication libraries require manual settings. For PhantAuth default [tenant](tenant), the address of the Discovery Endpoint is:
 
 ```
 https://phantauth.net/.well-known/openid-configuration
@@ -33,7 +33,7 @@ https://phantauth.net/.well-known/openid-configuration
 
 ## Authorization Endpoint
 
-The address of the Authorization Endpoint is required for all three OpenID Connect Flows if the given authentication library does not implement the OpenID Connect Discovery specifications. For PhantAuth default [tenant](tenant.md), the address of the Authorization Endpoint is:
+The address of the Authorization Endpoint is required for all three OpenID Connect Flows if the given authentication library does not implement the OpenID Connect Discovery specifications. For PhantAuth default [tenant](tenant), the address of the Authorization Endpoint is:
 
 ```
 https://phantauth.ml/auth/authorize
@@ -41,7 +41,7 @@ https://phantauth.ml/auth/authorize
 
 ## Token Endpoint
 
-For the Authorization Code Flow and Hybrid Flow, you have to specify the Token Endpoint address, if the given authentication library does not implement the OpenID Connect Discovery specifications. For PhantAuth default [tenant](tenant.md), the address of the Token Endpoint is:
+For the Authorization Code Flow and Hybrid Flow, you have to specify the Token Endpoint address, if the given authentication library does not implement the OpenID Connect Discovery specifications. For PhantAuth default [tenant](tenant), the address of the Token Endpoint is:
 
 ```
 https://phantauth.ml/auth/token
@@ -143,7 +143,7 @@ The `uid` scope and claim are not standard values, they are PhantAuth-specific!
 
 ## User Info Endpoint
 
-In general (with few exceptions), the authentication libraries do not require the setting of the User Info Endpoint, however, it may be useful if you want to get the data of the given user. For PhantAuth default [tenant](tenant.md), the address of the User Info Endpoint:
+In general (with few exceptions), the authentication libraries do not require the setting of the User Info Endpoint, however, it may be useful if you want to get the data of the given user. For PhantAuth default [tenant](tenant), the address of the User Info Endpoint:
 
 ```
 https://phantauth.ml/auth/userinfo
@@ -151,7 +151,7 @@ https://phantauth.ml/auth/userinfo
 
 ## Client Registration Endpoint
 
-PhantAuth implements the OAuth 2.0 Dynamic Client Registration Protocol. If the given library supports dynamic registration, you don't need to set the credential values decribed in section [Client Credentials](#client-credentials). For PhantAuth default [tenant](tenant.md), the address of the Client Registration Endpoint:
+PhantAuth implements the OAuth 2.0 Dynamic Client Registration Protocol. If the given library supports dynamic registration, you don't need to set the credential values decribed in section [Client Credentials](#client-credentials). For PhantAuth default [tenant](tenant), the address of the Client Registration Endpoint:
 
 ```
 https://phantauth.ml/auth/register
@@ -159,7 +159,7 @@ https://phantauth.ml/auth/register
 
 ## JWKS Endpoint
 
-In general, the authentication libraries don't require the setting of the JWKS Endpoint. For PhantAuth default [tenant](tenant.md), its value is:
+In general, the authentication libraries don't require the setting of the JWKS Endpoint. For PhantAuth default [tenant](tenant), its value is:
 
 ```
 https://phantauth.ml/auth/jwks

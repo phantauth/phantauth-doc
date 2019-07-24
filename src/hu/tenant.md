@@ -52,7 +52,7 @@ A tenant megjelenítendő neve a `name` paraméterben adható meg. Hiánya eset�
 
 ### flags
 
-A tenant működését befojásoló flageket tartalmazó paraméter (lásd [Flags](generator.md#flags)). Jelenleg a team méretét befolyásoló flag-nek van szerepe a login képernyőn. Amennyiben szerepel a flag-ek között team méret flag, úgy beviteli mező helyett egy listából lehet kiválasztani a felhasználót a login képernyőn. Lehetséges értékei:
+A tenant működését befojásoló flageket tartalmazó paraméter (lásd [Flags](generator#flags)). Jelenleg a team méretét befolyásoló flag-nek van szerepe a login képernyőn. Amennyiben szerepel a flag-ek között team méret flag, úgy beviteli mező helyett egy listából lehet kiválasztani a felhasználót a login képernyőn. Lehetséges értékei:
 
  - tiny
  - small
