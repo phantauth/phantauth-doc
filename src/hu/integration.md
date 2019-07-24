@@ -15,17 +15,17 @@ Az integráláshoz jellemzően az alábbi paraméterek szükségesek:
 
 ## Issuer
 
-Az Issuer URL azonosítja az OpenID Connect Providert, PhantAuth default [tenant](tenant.md) esetén az értéke:
+Az Issuer URL azonosítja az OpenID Connect Providert, PhantAuth default [tenant](tenant) esetén az értéke:
 
 ```
 https://phantauth.net
 ```
 
-PhantAuth esetén az Issuer URL egy dokumentációs web lap is egyben, mely tartalmazza az adott [tenant](tenant.md) használatához szükséges információkat.
+PhantAuth esetén az Issuer URL egy dokumentációs web lap is egyben, mely tartalmazza az adott [tenant](tenant) használatához szükséges információkat.
 
 ## Discovery Endpoint
 
-Amennyiben az adott authentikációs library támogatja az OpenID Connect Discovery 1.0 specifikáció Obtain OpenID Provider Configuration Information fejezetében definiált konfigurációs protokollt, úgy nem szükséges a különböző végpontok egyedi konfiurálása. Bár a specifikáció rögzíti az Issuer URL-hez relatívan a Discovery Endpoint címét, néhány authentikációs library elvárja ennek manuális beállítását. PhantAuth default [tenant](tenant.md) esetén a Discovery Endpoint címe:
+Amennyiben az adott authentikációs library támogatja az OpenID Connect Discovery 1.0 specifikáció Obtain OpenID Provider Configuration Information fejezetében definiált konfigurációs protokollt, úgy nem szükséges a különböző végpontok egyedi konfiurálása. Bár a specifikáció rögzíti az Issuer URL-hez relatívan a Discovery Endpoint címét, néhány authentikációs library elvárja ennek manuális beállítását. PhantAuth default [tenant](tenant) esetén a Discovery Endpoint címe:
 
 ```
 https://phantauth.net/.well-known/openid-configuration
@@ -33,7 +33,7 @@ https://phantauth.net/.well-known/openid-configuration
 
 ## Authorization Endpoint
 
-Mindhárom OpenID Connect Flow esetén szükséges az Authorization Endpoint címének megadása amennyiben az adott authentikációs library nem implementálja az OpenID Connect Discovery specifikációt. PhantAuth default [tenant](tenant.md) esetén az Authorization Endpoint címe:
+Mindhárom OpenID Connect Flow esetén szükséges az Authorization Endpoint címének megadása amennyiben az adott authentikációs library nem implementálja az OpenID Connect Discovery specifikációt. PhantAuth default [tenant](tenant) esetén az Authorization Endpoint címe:
 
 ```
 https://phantauth.ml/auth/authorize
@@ -41,7 +41,7 @@ https://phantauth.ml/auth/authorize
 
 ## Token Endpoint
 
-Authorization Code Flow és Hybrid Flow esetén szükséges a Token Endpoint címének megadása amennyiben az adott authentikációs library nem implementálja az OpenID Connect Discovery specifikációt. PhantAuth default [tenant](tenant.md) esetén az Token Endpoint címe:
+Authorization Code Flow és Hybrid Flow esetén szükséges a Token Endpoint címének megadása amennyiben az adott authentikációs library nem implementálja az OpenID Connect Discovery specifikációt. PhantAuth default [tenant](tenant) esetén az Token Endpoint címe:
 
 ```
 https://phantauth.ml/auth/token
@@ -143,7 +143,7 @@ Az `uid` scope és claim nem szabványos, PhantAuth specifikus!
 
 ## User Info Endpoint
 
-Rendszerint az authentikációs library-k nem igénylik a User Info Endpoint beállítását (egy két kivételtől eltekintve), azonban hasznos lehet az adott felhasználó adatainak lekérdezéséhez. PhantAuth default [tenant](tenant.md) esetén az User Info Endpoint címe:
+Rendszerint az authentikációs library-k nem igénylik a User Info Endpoint beállítását (egy két kivételtől eltekintve), azonban hasznos lehet az adott felhasználó adatainak lekérdezéséhez. PhantAuth default [tenant](tenant) esetén az User Info Endpoint címe:
 
 ```
 https://phantauth.ml/auth/userinfo
@@ -151,7 +151,7 @@ https://phantauth.ml/auth/userinfo
 
 ## Client Registration Endpoint
 
-A PhantAuth implementálja az OAuth 2.0 Dynamic Client Registration Protocol-t. Amennyiben az adott library támogatja a dinamikus regisztrációt, úgy nem szükséges a [Client Credentials](#client-credentials) pontban leírtaknak megfelelő credentials értékek beállítása. PhantAuth default [tenant](tenant.md) esetén a Client Registration Endpoint címe:
+A PhantAuth implementálja az OAuth 2.0 Dynamic Client Registration Protocol-t. Amennyiben az adott library támogatja a dinamikus regisztrációt, úgy nem szükséges a [Client Credentials](#client-credentials) pontban leírtaknak megfelelő credentials értékek beállítása. PhantAuth default [tenant](tenant) esetén a Client Registration Endpoint címe:
 
 ```
 https://phantauth.ml/auth/register
@@ -159,7 +159,7 @@ https://phantauth.ml/auth/register
 
 ## JWKS Endpoint
 
-Rendszerint az authentikációs library-k nem igénylik a JWKS Endpoint beállítását. PhantAuth default [tenant](tenant.md) esetén értéke:
+Rendszerint az authentikációs library-k nem igénylik a JWKS Endpoint beállítását. PhantAuth default [tenant](tenant) esetén értéke:
 
 ```
 https://phantauth.ml/auth/jwks

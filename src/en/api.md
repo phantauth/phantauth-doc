@@ -77,7 +77,7 @@ To customize the application, you need to use one or more so-called tenants. A t
 
 The tenants can be organised into so-called domains. Practically, a domain is a DNS zone, which contains the settings of the given tenant(s). The tenants as well as the domain can be configured by the use of DNS TXT records.
 
-In addition to the default tenant, the PhantAuth Domain contains some sample tenants, which are primarily designed to demonstrate customitability, a range of hosting possibilities, and the links to external services. In most cases, using the [default tenant](https://phantauth.net) is enough.
+In addition to the default tenant, the PhantAuth domain contains some sample tenants, which are primarily designed to demonstrate customizability, a range of hosting possibilities, and the links to external services. In most cases, using the [default tenant](https://phantauth.net) is enough.
 
 - [PhantAuth Default](https://phantauth.net) - default tenant, based on a Java Fairy library
 - [Greek Gods](https://phantauth.net/_gods) - based on a Google Sheet document
@@ -88,7 +88,7 @@ In addition to the default tenant, the PhantAuth Domain contains some sample ten
 - [uinames](https://phantauth.net/_uinames) - based on https://uinames.com service
 - [Mockaroo](https://phantauth.net/_mockaroo) - based on  https://mockaroo.com service
 
-Anyone can create a domain and the tenants. Sharing the tenants is facilitated by the [PhantAuth Shared Domain](https://shared.phantauth.net). A shared domain is connected to the [phantauth.cf](http://phantauth.cf) DNS zone, where anyone can create tenant configuration notes by the use of the [FreeDNS](https://freedns.afraid.org/) service.
+Anyone can create a domain and the tenants. Sharing the tenants is facilitated by the [PhantAuth Shared Domain](https://shared.phantauth.net). A shared domain is connected to the [phantauth.cf](http://phantauth.cf) DNS zone, where anyone can create tenant configuration nodes by the use of the [FreeDNS](https://freedns.afraid.org/) service.
 
 ### Concept
 

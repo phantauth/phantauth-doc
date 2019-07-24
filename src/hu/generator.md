@@ -114,4 +114,4 @@ A PhantAuth rendszer képes külső adatforrások s generátorok használatára.
 
 A külső generátorok egy speciális esete a külső adatforrás használata. Ez esetben egy comma separated value (CSV) file-ban vagy egy Google Sheet dokumentumben adhatók meg az objektumok jellemzői.
 
-Külső adatforrások és generátorok úgynevezett [tenant](tenant.md)-ok használatával definiálhatók, melyek leírása a [Tenant](tenant.md) fejezetben található.
+Külső adatforrások és generátorok úgynevezett [tenant](tenant)-ok használatával definiálhatók, melyek leírása a [Tenant](tenant) fejezetben található.
